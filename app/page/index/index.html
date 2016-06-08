@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../js/lib/pagination/pagination.css"/>
+</head>
+<body>
+<div class="box">i am a box</div>
+<input id="hello1">
+<span class="laydate-icon" onclick="laydate({elem: '#hello1'});"></span>
+<div class="pagination">
+
+</div>
+<div class="template-box"></div>
+<script id="template" type="text/x-handlebars-template">
+    <div>name:{{name}}</div>
+</script>
+
+<div class="dropdown">
+    <a id="dLabel" data-target="dLabel-menu" href="http://example.com" data-toggle="dropdown" aria-expanded="false">
+        Dropdown trigger
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" id="dLabel-menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+    </ul>
+</div>
+
+<form action="" id="signupForm">
+    <div class="form-group name">
+        <label><span>*</span>企业名称：</label>
+        <input type="text" class="form-control" id="companyname" name="name" placeholder="请输入企业名称" maxlength="50">
+    </div>
+    <button id="submitbutton" class="btn btn-info">同意使用协议并开通服务</button>
+</form>
+
+<div id="charts" style="width:500px;height:200px;"></div>
+<script src="../../js/business/config.js"></script>
+<script data-main="business/test" src="../../js/lib/require.js"></script>
+</body>
+</html>
