@@ -16,7 +16,7 @@ var require = {
         'pagination': 'lib/pagination/jquery.pagination',
         'validate': 'lib/validate/jquery.validate.min',
         'echarts': 'lib/echarts/echarts.min',
-        'common.config': 'common/config/config',
+        'config': 'common/config',
         'html5shiv.min': 'lib/html5shiv.min',
         'respond.min': 'lib/respond.min'
     },
