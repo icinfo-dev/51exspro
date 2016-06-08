@@ -11,7 +11,7 @@ define(['jquery', 'layer', 'config', 'util'], function ($, layer, config, util) 
         dataType: 'json',
         type: 'get',
         serializable: false,
-        userDefault: false
+        defaultAction: false
     };
 
     /**
