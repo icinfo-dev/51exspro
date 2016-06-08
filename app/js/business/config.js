@@ -13,6 +13,9 @@ var require = {
         'common.config': 'common/config/config'
     },
     shim: {
+        'jquery.cookie': {
+            deps: ['jquery']
+        },
         'bootstrap': {
             deps: ['jquery']
         },
