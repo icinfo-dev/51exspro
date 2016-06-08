@@ -23,7 +23,7 @@ var require = {
             deps: ['jquery']
         },
         'pagination': {
-            deps: ['jquery']
+            deps: ['jquery','../../app/js/lib/css!../../app/js/lib/pagination/pagination.css']
         },
         'validate': {
             deps: ['jquery']
