@@ -1,3 +1,9 @@
+var bootstrapDepsPath = ['jquery'];
+if(navigator.userAgent.indexOf("MSIE")>0){
+    if(navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0 || navigator.userAgent.indexOf("MSIE 8.0")>0){
+        bootstrapDepsPath.push('html5shiv.min','respond.min');
+    }
+}
 var require = {
     baseUrl: '../../js/',
     paths: {
@@ -10,14 +16,16 @@ var require = {
         'pagination': 'lib/pagination/jquery.pagination',
         'validate': 'lib/validate/jquery.validate.min',
         'echarts': 'lib/echarts/echarts.min',
-        'common.config': 'common/config/config'
+        'common.config': 'common/config/config',
+        'html5shiv.min': 'lib/html5shiv.min',
+        'respond.min': 'lib/respond.min'
     },
     shim: {
         'jquery.cookie': {
             deps: ['jquery']
         },
         'bootstrap': {
-            deps: ['jquery']
+            deps: bootstrapDepsPath
         },
         'layer': {
             deps: ['jquery']
@@ -29,7 +37,7 @@ var require = {
             deps: ['jquery']
         },
         'laydate': {
-            exports: 'laydate'
+            deps: ['jquery']
         }
     }
 }
