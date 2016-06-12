@@ -114,6 +114,40 @@ define(["jquery", "jquery.cookie"], function () {
         return newArr;
     }
 
+    /**
+     * 对于不同占位符展示不同的html片段
+     * @type {{
+     * key: type,
+     * value: html片段
+     * }}
+     */
+    var loadingTypeConfig = {
+        1: '<div class="loading"><img class="loading-img" src="../../img/loading_48.gif" /></div>'
+    }
+    /**
+     * 加载中占位符
+     * @param ele string(selector)
+     * @param type string
+     */
+    function showLoading(ele,type){
+        var ele = $(ele);
+        var html = loadingTypeConfig[type];
+        ele.append(html);
+        var loading = ele.find('.loading');
+        var loadingImg = loading.find('.loading-img');
+        var w = loadingImg.width();
+        var h = loadingImg.height();
+        loading.css({'position':'relative','width':'100%','height': '100%'});
+        loadingImg.css({'marginLeft':(-1)*w/2+'px','marginTop': (-1)*h/2+'px','position':'absolute','top': '50%','left': '50%'});  //垂直居中
+    }
+    /**
+     * 删除加载占位符
+     * @param ele string(selector)
+     */
+    function removeLoading(ele){
+        var ele = $(ele);
+        ele.find('.loading').remove();
+    }
     // 返回
     return {
         // 事件绑定
@@ -129,6 +163,8 @@ define(["jquery", "jquery.cookie"], function () {
         // base64字符编码
         base64Encode: base64Encode,
         // 去除空格
-        trims: trims
+        trims: trims,
+        showLoading: showLoading,
+        removeLoading: removeLoading
     };
 });
