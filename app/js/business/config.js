@@ -5,7 +5,7 @@ if(navigator.userAgent.indexOf("MSIE")>0){
     }
 }
 var require = {
-    baseUrl: '../../js/',
+    baseUrl: '/js',
     paths: {
         'jquery': 'lib/jquery-1.12.3.min',
         'jquery.cookie': 'lib/cookie/jquery.cookie',
@@ -21,7 +21,8 @@ var require = {
         'util': 'common/util',
         'html5shiv.min': 'lib/html5shiv.min',
         'respond.min': 'lib/respond.min',
-        'text': 'lib/text'
+        'text': 'lib/text',
+        'commonController' : 'business/common/controller/commonController'
     },
     shim: {
         'jquery.cookie': {
@@ -42,5 +43,6 @@ var require = {
         'laydate': {
             deps: ['jquery']
         }
+
     }
 }

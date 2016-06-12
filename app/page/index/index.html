@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>e信使舆情官网-免费舆情、舆情监测、舆情系统、舆情软件、媒体监测、情报监测、信息监测、舆情分析、舆情产品</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Own Css -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/tools.css" rel="stylesheet">
+</head>
+
+<body>
+<header data-render=true data-model="header"></header>
+
+<div class="page page-index" data-module="index" data-controller="index">
+    <!-- 导航开始 -->
+    <menu data-render=true data-model="menu"></menu>
+    <!-- 导航结束 -->
+    <!-- 主体内容开始 -->
+    <div class="main content">
+        <!------舆情------->
+        <div class="plan modelLoding">
+            <div class="hidden plan-title">
+                <h3><a href="/pages/monitor/allplan.html" target="_blank">全部舆情方案</a></h3>
+
+                <div class="plan-data">
+                    <ul class="clearfix" id="yqfaTitle">
+                        <li>近一周</li>
+                        <li>总量：<span class="sumCnt turnPageJcfa" data-sentiment=""></span></li>
+                        <li>正面：<span class="text-blue positiveNum turnPageJcfa" data-sentiment="positive"> </span></li>
+                        <li>负面：<span class="text-danger negativeNum turnPageJcfa" data-sentiment="negative"> </span></li>
+                        <li>中性：<span class="text-middle neutralNum turnPageJcfa" data-sentiment="neutral"> </span></li>
+                        <li>负面占比：<span class="negativePercent"> </span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="hidden plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a href="#list1-all" data-toggle="tab">全部</a></li>
+                            <li data-type="positive"><a href="#list1-p" data-toggle="tab">正面</a></li>
+                            <li data-type="neutral"><a href="#list1-z" data-toggle="tab">中性</a></li>
+                            <li data-type="negative"><a href="#list1-f" data-toggle="tab">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider in active list1box1" id="list1-all">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListAll">
+                                    <script id="yqfaListAllScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            <p><a class="plan-main-item"
+                                                  href="/pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}" target="_blank"
+                                                  data-pageturn="true">{{this.title}}</a>
+                                                {{#if this.sentiment}}
+                                                {{#compare this.sentiment 1}}
+                                                <span class="label label-info label-ststus">正面</span>
+                                                {{else}}
+                                                {{#if this.sentiment}}
+                                                {{#compare this.sentiment -1}}
+                                                <span class="label label-danger label-ststus">负面</span>
+                                                {{else}}
+                                                <span class="label label-success label-ststus">中性</span>
+                                                {{/compare}}
+                                                {{/if}}
+                                                {{/compare}}
+                                                {{/if}}
+
+                                                {{#if this.isWarn}}
+                                                {{#js_compare isWarn 'yes'}}
+                                                <span class="label label-danger">预警</span>
+                                                {{else}}
+                                                {{/js_compare}}
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [<a
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list1box1" id="list1-p">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListP">
+                                    <script id="yqfaListPScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            {{#if this.sentiment}}
+                                            {{#compare this.sentiment 1}}
+                                            <p><a class="plan-main-item" href="{{this.url}}">{{this.title}}</a>
+                                                <span class="label label-info">正面</span>
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [<a
+                                                    href="/pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                            {{else}}
+                                            {{/compare}}
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list1box1" id="list1-z">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListZ">
+                                    <script id="yqfaListZScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            {{#if this.sentiment}}
+                                            {{#compare this.sentiment 0}}
+                                            <p><a class="plan-main-item"
+                                                  href="/pages/monitor/infodetail.html?docID={{this.docId}}"
+                                                  data-pageTurn="true">{{this.title}}</a>
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [<a
+                                                    href="/pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                            {{else}}
+                                            {{/compare}}
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list1box1" id="list1-f">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListF">
+                                    <script id="yqfaListFScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            {{#if this.sentiment}}
+                                            {{#compare this.sentiment -1}}
+                                            <p><a class="plan-main-item" href="{{this.url}}">{{this.title}}</a>
+                                                <span class="label label-danger">负面</span>
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [ <a
+                                                    href="/pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a> ]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                            {{else}}
+                                            {{/compare}}
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------情感分布------->
+                <div class="plan-main-right">
+                    <div class="plan-main-title">
+                        <ul>
+                            <li>情感分布</li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置 -->
+                        <div id="chartPie">
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan-main-title">
+                        <ul>
+                            <li>数据源舆情走势</li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置 -->
+                        <div id="chartLine">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 我的公司 -->
+        <div class="plan hidden" planID=" ">
+            <div class="plan-title">
+                <a><h3></h3></a>
+
+                <div class="plan-data">
+                    <ul class="clearfix">
+                        <li>近一周</li>
+                        <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal turnPageJcfa" data-sentiment="positive">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal turnPageJcfa" data-sentiment="negative">3</span></li>
+                        <li>负面占比：<span class="negativePercent">50%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a data-toggle="tab" href="#listn1-all">全部</a></li>
+                            <li data-type="positive"><a data-toggle="tab" href="#listn1-p">正面</a></li>
+                            <li data-type="neutral"><a data-toggle="tab" href="#listn1-z">中性</a></li>
+                            <li data-type="negative"><a data-toggle="tab" href="#listn1-f">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider list2box active" id="listn1-all">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list2box" id="listn1-p">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list2box" id="listn1-z">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list2box" id="listn1-f">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------我的公司右侧图表-------->
+                <div class="plan-main-right">
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置2 -->
+                        <div id="chartBar1">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-----行业------>
+        <div class="plan hidden" planID=" ">
+            <div class="plan-title">
+                <a><h3></h3></a>
+
+                <div class="plan-data">
+                    <ul class="clearfix">
+                        <li>近一周</li>
+                        <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal turnPageJcfa" data-sentiment="positive">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal turnPageJcfa" data-sentiment="negative">3</span></li>
+                        <li>负面占比：<span class="negativePercent">50%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a data-toggle="tab" href="#listn2-all">全部</a></li>
+                            <li data-type="positive"><a data-toggle="tab" href="#listn2-p">正面</a></li>
+                            <li data-type="neutral"><a data-toggle="tab" href="#listn2-z">中性</a></li>
+                            <li data-type="negative"><a data-toggle="tab" href="#listn2-f">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider list3box active" id="listn2-all">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list3box" id="listn2-p">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list3box" id="listn2-z">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list3box" id="listn2-f">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------我的公司右侧图表-------->
+                <div class="plan-main-right">
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置2 -->
+                        <div id="chartBar2">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plan hidden" planID=" ">
+            <div class="plan-title">
+                <a><h3></h3></a>
+
+                <div class="plan-data">
+                    <ul class="clearfix">
+                        <li>近一周</li>
+                        <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal turnPageJcfa" data-sentiment="positive">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal turnPageJcfa" data-sentiment="negative">3</span></li>
+                        <li>负面占比：<span class="negativePercent">50%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a data-toggle="tab" href="#listn3-all">全部</a></li>
+                            <li data-type="positive"><a data-toggle="tab" href="#listn3-p">正面</a></li>
+                            <li data-type="neutral"><a data-toggle="tab" href="#listn3-z">中性</a></li>
+                            <li data-type="negative"><a data-toggle="tab" href="#listn3-f">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider list4box active" id="listn3-all">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list4box" id="listn3-p">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list4box" id="listn3-z">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list4box" id="listn3-f">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------我的公司右侧图表-------->
+                <div class="plan-main-right">
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置2 -->
+                        <div id="chartBar3">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottomLoading hidden" >
+            <div class='noDataBox'><img src='img/loading_32.gif' /></div>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+
+    <!-- 主体内容结束 -->
+</div>
+<footer data-render=true data-model="footer"></footer>
+<!-- 底部结束 -->
+<script src="/js/business/config.js"></script>
+<script data-main="business/app" src="/js/lib/require.js"></script>
+</body>
+</html>

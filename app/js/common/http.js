@@ -30,7 +30,7 @@ define(['jquery', 'layer', 'config', 'util'], function ($, layer, config, util) 
      * }
      * @returns {void|*}
      */
-    function generateParam(options) {
+    function generateHttpParam(options) {
         // 参数合并
         var opt = $.extend({}, defaultOpt, options);
 
@@ -66,7 +66,7 @@ define(['jquery', 'layer', 'config', 'util'], function ($, layer, config, util) 
             options.success && options.success(data);
         };
         // 失败回调
-        opt.error = function () {
+        opt.error = function () {debugger;
             if (opt.defaultAction) {
                 util.showError(opt.actionConfig.dom, opt.actionConfig.type);
             }

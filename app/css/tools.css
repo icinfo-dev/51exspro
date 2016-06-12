@@ -1,0 +1,78 @@
+/*工具*/
+.cy-nopadding {
+	padding: 0 !important;
+}
+.cy-nopadding-top {
+	padding-top: 0 !important;
+}
+.cy-nopadding-right {
+	padding-right: 0 !important;
+}
+.cy-nopadding-bottom {
+	padding-bottom: 0 !important;
+}
+.cy-nopadding-left {
+	padding-left: 0 !important;
+}
+.cy-nomargin {
+	margin: 0 !important;
+}
+.cy-nomargin-top {
+	margin-top: 0 !important;
+}
+.cy-nomargin-right {
+	margin-right: 0 !important;
+}
+.cy-nomargin-bottom {
+	margin-bottom: 0 !important;
+}
+.cy-nomargin-left {
+	margin-left: 0 !important;
+}
+.cy-noborder {
+	border: none !important;
+}
+.cy-noborder-top {
+	border-top: none !important;
+}
+.cy-noborder-right {
+	border-right: none !important;
+}
+.cy-noborder-bottom {
+	border-bottom: none !important;
+}
+.cy-noborder-left {
+	border-left: none !important;
+}
+.page-warnCenter .warning-setting-main .cy-panel .panel-body {
+	padding: 20px 40px 20px 40px;
+	height: 280px;
+}
+.page-warnCenter .warning-setting-main .cy-panel .panel-body .addWarnEmail{
+	text-align: center;
+	line-height: 200px;
+	font-size: 18px;
+	color: #ff9966;
+	cursor: pointer;
+}
+.page-warnCenter .full-view-main-content>.tab-pane {
+	padding: 20px;
+	background: #fff;
+}
+.page-warnCenter .warning-setting-main .cy-panel {
+	overflow: hidden;
+}
+.page-warnCenter .add-email-input .btn {
+	padding: 6px 12px;
+}
+.page-newYq .modify-plan-video .modify-plan-video-item .modify-plan-video-main .content-preview-list{
+	overflow-x: hidden;
+	white-space: nowrap;
+}
+.page-fullView .modify-plan-video .modify-plan-video-item .modify-plan-video-main .content-preview {
+	overflow-x: hidden;
+	white-space: nowrap;
+}
+.full-view-data-operation .share-box  .cancel-warn-one-tips {
+	left: -43px;
+}
