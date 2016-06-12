@@ -69,7 +69,7 @@ define(function () {
             //修改舆情方案
             "modifyuserplan": '/plan/userplan/modifyuserplan/v=1.0.0',
             //获取方案舆情周报列表
-            "getweeklyreportlist": prdEnvFlag ? config.interfaceServer + '/monitor/report/getweeklyreportlist/v=1.0.0' : '../../api/weeklyReportList.json',
+            "getweeklyreportlist": prdEnvFlag ? '/monitor/report/getweeklyreportlist/v=1.0.0' : '../../api/weeklyReportList.json',
             //舆情周报下载
             "downloadweeklyreport": '/monitor/report/downloadweeklyreport/v=1.0.0',
             //获取舆情导读列表
