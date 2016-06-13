@@ -10,7 +10,7 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
          */
         function bindEvents(bindings) {
             $.each(bindings, function (i, v) {
-                $(v.el).on(v.event, v.handler);
+                $(document).on(v.event, v.el, v.handler);
             });
         }
 
@@ -158,10 +158,24 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
         }
 
         /**
+         * 显示弹框
+         */
+        function _showModal(ele){
+            require(['text!/js/business/common/template/modal.html'],function(_modal){
+                var selector = $("body").find(ele);
+                !selector.length && $("body").append($(_modal).filter(ele));
+                selector.on('show.bs.modal', function (e) {
+
+                })
+                selector.modal('show');
+            });
+        }
+        /**
          * 弹出框 alert
          * @param  string(显示内容)
          */
-        function _alert(content) {
+        function _alert(content,title) {
+            var title = title || '温馨提示';
             if (!content)
                 return;
             if($("body .commonAlert").length == 0){
@@ -172,6 +186,7 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             }
             require(['text!/js/business/common/template/modal.html'],function(_modal){
                 $("body").append($(_modal).filter(".commonAlert"));
+                $("body .commonAlert").find(".modal-title").html(title);
                 $("body .commonAlert").find(".cy-model-content").html(content);
                 $("body .commonAlert").modal('show');
             });
@@ -265,6 +280,7 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             confirm: _confirm,
             alert: _alert,
             render: _render,
-            template :_refresh
+            template :_refresh,
+            showModal: _showModal
         };
     });
