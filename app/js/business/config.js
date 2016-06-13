@@ -16,13 +16,9 @@ var require = {
         'pagination': 'lib/pagination/jquery.pagination',
         'validate': 'lib/validate/jquery.validate.min',
         'echarts': 'lib/echarts/echarts.min',
-        'config': 'common/config',
-        'http': 'common/http',
-        'util': 'common/util',
         'html5shiv.min': 'lib/html5shiv.min',
         'respond.min': 'lib/respond.min',
-        'text': 'lib/text',
-        'commonController' : 'business/common/controller/commonController'
+        'text': 'lib/text'
     },
     shim: {
         'jquery.cookie': {
