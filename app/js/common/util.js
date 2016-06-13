@@ -1,18 +1,8 @@
 /**
  * 工具集
  */
-define(["text!/js/business/common/template/modal.html",
-        "text!/js/business/common/template/header.html",
-        "text!/js/business/common/template/footer.html",
-        "text!/js/business/common/template/menu.html",
-        "text!/js/business/common/template/404.html","handlebars", "jquery", "jquery.cookie", "bootstrap"],
-    function (_modal, _header, _footer, _menu, _404,handlebars) {
-        var map = {
-          'header':_header,
-          'footer':_footer,
-          'menu':_menu,
-          '404':_404
-        };
+define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
+    function (handlebars) {
         /**
          * 事件绑定
          * @param bindings [{el:x,event:y,handler:z}]
@@ -174,9 +164,19 @@ define(["text!/js/business/common/template/modal.html",
         function _alert(content) {
             if (!content)
                 return;
-            $("body .commonAlert").length == 0 && $("body").append($(_modal).filter(".commonAlert"));
-            $("body .commonAlert").find(".cy-model-content").html(content);
-            $("body .commonAlert").modal('show');
+            if($("body .commonAlert").length == 0){
+
+            }else{
+                $("body .commonAlert").find(".cy-model-content").html(content);
+                $("body .commonAlert").modal('show');
+            }
+            require(['text!/js/business/common/template/modal.html'],function(_modal){
+                $("body").append($(_modal).filter(".commonAlert"));
+                $("body .commonAlert").find(".cy-model-content").html(content);
+                $("body .commonAlert").modal('show');
+            });
+
+
         }
 
         /**
@@ -195,39 +195,53 @@ define(["text!/js/business/common/template/modal.html",
             var html;
             if(template){
                 html = template;
+                if($(html).find("script").length==0||data==""){
+                    tar.html(html);
+                }else{
+                    var myTemplate = handlebars.compile($(html).find("script").html());
+                    tar.html(myTemplate(data));
+                }
             }else{
                 var keyArr = tar.data("model").split(" ");
                 var key = keyArr[0];
-                if(!map[key]||!key)
-                            return;
-                if(keyArr[1]){
-                    html = $(map[key]).filter(keyArr[1]).html();
-                }else{
-                    html = map[key];
-                }
+                var requirePath = "text!/js/business/common/template/";
+                requirePath += key+'.html';
+                require([requirePath],function(_model){
+                    if(keyArr[1]){
+                        html = $(_model).filter(keyArr[1]).html();
+                    }else{
+                        html = _model;
+                    }
+                    if($(html).find("script").length==0||data==""){
+                        tar.html(html);
+                    }else{
+                        var myTemplate = handlebars.compile($(html).find("script").html());
+                        tar.html(myTemplate(data));
+                    }
+                });
             }
-            if($(html).find("script").length==0||data==""){
-                tar.html(html);
-            }else{
-                var myTemplate = handlebars.compile($(html).find("script").html());
-                tar.html(myTemplate(data));
-            }
+
         }
-        function _render(tar){
+        function _render(tar,callback){
+            if(!tar.data("model"))
+                return;
             var html;
             var keyArr = tar.data("model").split(" ");
             var key = keyArr[0];
-            if(!map[key]||!key)
-                return;
-            if(keyArr[1]){
-                html = $(map[key]).filter(keyArr[1]).html();
-            }else{
-                html = map[key];
-            }
-            tar.html(html);
-            if(tar.find("script").length!=0){
-                tar.find("script").parent().data("model",tar.data("model"));
-            }
+            var requirePath = "text!/js/business/common/template/";
+            requirePath += key+'.html';
+            require([requirePath],function(_model){
+                if(keyArr[1]){
+                    html = $(_model).filter(keyArr[1]).html();
+                }else{
+                    html = _model;
+                }
+                tar.html(html);
+                if(tar.find("script").length!=0){
+                    tar.find("script").parent().data("model",tar.data("model"));
+                }
+                $.isFunction(callback) && callback();
+            });
         }
         // 返回
         return {
@@ -251,6 +265,6 @@ define(["text!/js/business/common/template/modal.html",
             confirm: _confirm,
             alert: _alert,
             render: _render,
-            refresh :_refresh
+            template :_refresh
         };
     });

@@ -27,7 +27,7 @@ define(["handlebars"], function (Handlebars) {
     listModel = listModel ? listModel :$("#yqfaListAllScript").html();
     var myTemplate = Handlebars.compile(listModel);
     var dom = tabID ? $(tabID) : $("#list1-all");
-    dom.find("ul").html(myTemplate(data));
+    dom.find("ul").temolate(data,listModel);
     if(arguments.length==3 && arguments[2]!=1){
        dom.find(".plan-main-list").find("li p span.label-ststus").hide();
     }

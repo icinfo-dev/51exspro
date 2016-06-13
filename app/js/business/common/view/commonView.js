@@ -13,6 +13,12 @@ define(["util","business/common/model/commonModel"], function (utils,model) {
         $("header").render();
     }
     /**
+     * 渲染头部信息
+     * */
+    function _renderSearch() {
+        $("search").render();
+    }
+    /**
      * 渲染底部信息
      * */
     function _renderFooter() {
@@ -22,19 +28,17 @@ define(["util","business/common/model/commonModel"], function (utils,model) {
      * 获取菜单栏
      * */
     function _renderMenu() {
-        $("menu").render();
+        $("menu").render(_getMenuData);
+    }
+    function _getMenuData(){
         model.getMenuData(_showMenu);
     }
     /**
      * 渲染菜单栏
      * */
     function _showMenu(data) {
-        $("menu .nav-main").refresh(data);
-        setTimeout(function(){
-            $("menu .nav-main").refresh([{title:"zhanghuan"}]);
-            utils.alert("sdadsadas");
-        },3000);
-        //utils.alert("sdadsadas");
+        $("menu .nav-main").template(data);
+        utils.alert("sdadsadas");
     }
 
     // 返回
@@ -42,6 +46,6 @@ define(["util","business/common/model/commonModel"], function (utils,model) {
         renderHeader: _renderHeader,
         renderFooter: _renderFooter,
         renderMenu: _renderMenu,
-        showMenu : _showMenu
+        renderSearch:_renderSearch
     }
 });
