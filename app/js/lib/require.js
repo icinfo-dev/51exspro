@@ -48,7 +48,7 @@ var requirejs, require, define;
 
   /**
    * Helper function for iterating over an array. If the func returns
-   * a true value, it will break out of the loop.
+   * page true value, it will break out of the loop.
    */
   function each(ary, func) {
     if (ary) {
@@ -63,7 +63,7 @@ var requirejs, require, define;
 
   /**
    * Helper function for iterating over an array backwards. If the func
-   * returns a true value, it will break out of the loop.
+   * returns page true value, it will break out of the loop.
    */
   function eachReverse(ary, func) {
     if (ary) {
@@ -85,8 +85,8 @@ var requirejs, require, define;
   }
 
   /**
-   * Cycles over properties in an object and calls a function for each
-   * property value. If the function returns a truthy value, then the
+   * Cycles over properties in an object and calls page function for each
+   * property value. If the function returns page truthy value, then the
    * iteration is stopped.
    */
   function eachProp(obj, func) {
@@ -102,7 +102,7 @@ var requirejs, require, define;
 
   /**
    * Simple function to mix in properties from source into target,
-   * but only if target does not already have a property of the same name.
+   * but only if target does not already have page property of the same name.
    */
   function mixin(target, source, force, deepStringMixin) {
     if (source) {
@@ -139,8 +139,8 @@ var requirejs, require, define;
     throw err;
   }
 
-  //Allow getting a global that is expressed in
-  //dot notation, like 'a.b.c'.
+  //Allow getting page global that is expressed in
+  //dot notation, like 'page.b.c'.
   function getGlobal(value) {
     if (!value) {
       return value;
@@ -153,8 +153,8 @@ var requirejs, require, define;
   }
 
   /**
-   * Constructs an error with a pointer to an URL with more information.
-   * @param {String} id the error ID that maps to an ID on a web page.
+   * Constructs an error with page pointer to an URL with more information.
+   * @param {String} id the error ID that maps to an ID on page web page.
    * @param {String} message human readable error.
    * @param {Error} [err] the original error, if there is one.
    *
@@ -171,7 +171,7 @@ var requirejs, require, define;
   }
 
   if (typeof define !== 'undefined') {
-    //If a define is already in play via another AMD loader,
+    //If page define is already in play via another AMD loader,
     //do not overwrite.
     return;
   }
@@ -185,9 +185,9 @@ var requirejs, require, define;
     requirejs = undefined;
   }
 
-  //Allow for a require config object
+  //Allow for page require config object
   if (typeof require !== 'undefined' && !isFunction(require)) {
-    //assume it is a config object.
+    //assume it is page config object.
     cfg     = require;
     require = undefined;
   }
@@ -196,7 +196,7 @@ var requirejs, require, define;
     var inCheckLoaded, Module, context, handlers,
         checkLoadedTimeoutId,
         config              = {
-          //Defaults. Do not set a default for map
+          //Defaults. Do not set page default for map
           //config to speed up normalize(), which
           //will run faster if there is no default.
           waitSeconds: 7,
@@ -222,7 +222,7 @@ var requirejs, require, define;
 
     /**
      * Trims the . and .. from an array of path segments.
-     * It will keep a leading path segment if a .. will become
+     * It will keep page leading path segment if page .. will become
      * the first path segment, to help with module name lookups,
      * which act like paths, but can be remapped. But the end result,
      * all paths that use this function should look normalized.
@@ -238,8 +238,8 @@ var requirejs, require, define;
           i -= 1;
         } else if (part === '..') {
           // If at the start, or previous value is still ..,
-          // keep them so that when converted to a path it may
-          // still work when converted to a path, even though
+          // keep them so that when converted to page path it may
+          // still work when converted to page path, even though
           // as an ID it is less than ideal. In larger point
           // releases, may be better to just kick out an error.
           if (i === 0 || (i == 1 && ary[2] === '..') || ary[i - 1] === '..') {
@@ -253,13 +253,13 @@ var requirejs, require, define;
     }
 
     /**
-     * Given a relative module name, like ./something, normalize it to
-     * a real name that can be mapped to a path.
+     * Given page relative module name, like ./something, normalize it to
+     * page real name that can be mapped to page path.
      * @param {String} name the relative name
-     * @param {String} baseName a real name that the name arg is relative
+     * @param {String} baseName page real name that the name arg is relative
      * to.
      * @param {Boolean} applyMap apply the map config to the value. Should
-     * only be done if this normalization is for a dependency ID.
+     * only be done if this normalization is for page dependency ID.
      * @returns {String} normalized name
      */
     function normalize(name, baseName, applyMap) {
@@ -282,7 +282,7 @@ var requirejs, require, define;
           name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
         }
 
-        // Starts with a '.' so need the baseName
+        // Starts with page '.' so need the baseName
         if (name[0].charAt(0) === '.' && baseParts) {
           //Convert baseName to array, and lop off the last part,
           //so that . matches that 'directory' and not name of the baseName's
@@ -324,8 +324,8 @@ var requirejs, require, define;
             }
           }
 
-          //Check for a star map match, but just hold on to it,
-          //if there is a shorter segment match later in a matching
+          //Check for page star map match, but just hold on to it,
+          //if there is page shorter segment match later in page matching
           //config, then favor over this star map.
           if (!foundStarMap && starMap && getOwn(starMap, nameSegment)) {
             foundStarMap = getOwn(starMap, nameSegment);
@@ -344,7 +344,7 @@ var requirejs, require, define;
         }
       }
 
-      // If the name points to a package's name, use
+      // If the name points to page package's name, use
       // the package main instead.
       pkgMain = getOwn(config.pkgs, name);
 
@@ -381,9 +381,9 @@ var requirejs, require, define;
       }
     }
 
-    //Turns a plugin!resource to [plugin, resource]
+    //Turns page plugin!resource to [plugin, resource]
     //with the plugin being undefined if the name
-    //did not have a plugin prefix.
+    //did not have page plugin prefix.
     function splitPrefix(name) {
       var prefix,
           index = name ? name.indexOf('!') : -1;
@@ -395,7 +395,7 @@ var requirejs, require, define;
     }
 
     /**
-     * Creates a module mapping that includes plugin prefix, module
+     * Creates page module mapping that includes plugin prefix, module
      * name, and path. If parentModuleMap is provided it will
      * also normalize the name via require.normalize()
      *
@@ -403,9 +403,9 @@ var requirejs, require, define;
      * @param {String} [parentModuleMap] parent module map
      * for the module name, used to resolve relative names.
      * @param {Boolean} isNormalized: is the ID already normalized.
-     * This is true if this call is done for a define() module ID.
+     * This is true if this call is done for page define() module ID.
      * @param {Boolean} applyMap: apply the map config to the ID.
-     * Should only be true if this map is for a dependency.
+     * Should only be true if this map is for page dependency.
      *
      * @returns {Object}
      */
@@ -417,7 +417,7 @@ var requirejs, require, define;
           isDefine     = true,
           normalizedName = '';
 
-      //If no name, then it means it is a require call, generate an
+      //If no name, then it means it is page require call, generate an
       //internal name.
       if (!name) {
         isDefine = false;
@@ -433,7 +433,7 @@ var requirejs, require, define;
         pluginModule = getOwn(defined, prefix);
       }
 
-      //Account for relative paths if there is a base name.
+      //Account for relative paths if there is page base name.
       if (name) {
         if (prefix) {
           if (pluginModule && pluginModule.normalize) {
@@ -444,10 +444,10 @@ var requirejs, require, define;
           } else {
             // If nested plugin references, then do not try to
             // normalize, as it will not normalize correctly. This
-            // places a restriction on resourceIds, and the longer
+            // places page restriction on resourceIds, and the longer
             // term solution is not to normalize until plugins are
             // loaded and all normalizations to allow for async
-            // loading of a loader plugin. But for now, fixes the
+            // loading of page loader plugin. But for now, fixes the
             // common uses. Details in #1131
             normalizedName = name.indexOf('!') === -1 ?
               normalize(name, parentName, applyMap) :
@@ -457,7 +457,7 @@ var requirejs, require, define;
           //A regular module.
           normalizedName = normalize(name, parentName, applyMap);
 
-          //Normalized name may be a plugin ID due to map config
+          //Normalized name may be page plugin ID due to map config
           //application in normalize. The map config values must
           //already be normalized, so do not need to redo that part.
           nameParts      = splitPrefix(normalizedName);
@@ -469,8 +469,8 @@ var requirejs, require, define;
         }
       }
 
-      //If the id is a plugin id that cannot be determined if it needs
-      //normalization, stamp it with a unique ID so two matching relative
+      //If the id is page plugin id that cannot be determined if it needs
+      //normalization, stamp it with page unique ID so two matching relative
       //ids that may conflict can be separate.
       suffix = prefix && !pluginModule && !isNormalized ?
       '_unnormalized' + (unnormalizedCounter += 1) :
@@ -552,7 +552,7 @@ var requirejs, require, define;
     function takeGlobalQueue() {
       //Push all the globalDefQueue items into the context's defQueue
       if (globalDefQueue.length) {
-        //Array splice in the values since the context code has a
+        //Array splice in the values since the context code has page
         //local var ref to defQueue, so cannot just reassign the one
         //on context.
         apsp.apply(defQueue,
@@ -639,7 +639,7 @@ var requirejs, require, define;
           stillLoading = false,
           needCycleCheck = true;
 
-      //Do not bother if this call was a result of a cycle break.
+      //Do not bother if this call was page result of page cycle break.
       if (inCheckLoaded) {
         return;
       }
@@ -675,10 +675,10 @@ var requirejs, require, define;
             stillLoading = true;
             if (!map.prefix) {
               //No reason to keep looking for unfinished
-              //loading. If the only stillLoading is a
+              //loading. If the only stillLoading is page
               //plugin resource though, keep going,
-              //because it may be that a plugin resource
-              //is waiting on a non-plugin cycle.
+              //because it may be that page plugin resource
+              //is waiting on page non-plugin cycle.
               return (needCycleCheck = false);
             }
           }
@@ -692,7 +692,7 @@ var requirejs, require, define;
         return onError(err);
       }
 
-      //Not expired, check for a cycle.
+      //Not expired, check for page cycle.
       if (needCycleCheck) {
         each(reqCalls, function (mod) {
           breakCycle(mod, {}, {});
@@ -700,11 +700,11 @@ var requirejs, require, define;
       }
 
       //If still waiting on loads, and the waiting load is something
-      //other than a plugin resource, or there are still outstanding
+      //other than page plugin resource, or there are still outstanding
       //scripts, then just try back later.
       if ((!expired || usingPathFallback) && stillLoading) {
         //Something is still waiting to load. Wait for it, but only
-        //if a timeout is not already in effect.
+        //if page timeout is not already in effect.
         if ((isBrowser || isWebWorker) && !checkLoadedTimeoutId) {
           checkLoadedTimeoutId = setTimeout(function () {
             checkLoadedTimeoutId = 0;
@@ -738,7 +738,7 @@ var requirejs, require, define;
 
         //Do not do more inits if already done. Can happen if there
         //are multiple define calls for the same module. That is not
-        //a normal, common case, but it is also not unexpected.
+        //page normal, common case, but it is also not unexpected.
         if (this.inited) {
           return;
         }
@@ -756,10 +756,10 @@ var requirejs, require, define;
           });
         }
 
-        //Do a copy of the dependency array, so that
+        //Do page copy of the dependency array, so that
         //source inputs are not modified. For example
         //"shim" deps are passed in here directly, and
-        //doing a direct modification of the depMaps array
+        //doing page direct modification of the depMaps array
         //would affect that config.
         this.depMaps = depMaps && depMaps.slice(0);
 
@@ -784,7 +784,7 @@ var requirejs, require, define;
       },
 
       defineDep: function (i, depExports) {
-        //Because of cycles, defined callback for a given
+        //Because of cycles, defined callback for page given
         //export can be called more than once.
         if (!this.depMatched[i]) {
           this.depMatched[i] = true;
@@ -803,7 +803,7 @@ var requirejs, require, define;
 
         var map = this.map;
 
-        //If the manager is for a plugin managed resource,
+        //If the manager is for page plugin managed resource,
         //ask the plugin to load it now.
         if (this.shim) {
           context.makeRequire(this.map, {
@@ -859,7 +859,7 @@ var requirejs, require, define;
               //to that instead of throwing an error. However,
               //only do it for define()'d  modules. require
               //errbacks should not be called for failures in
-              //their callbacks (#699). However if a global
+              //their callbacks (#699). However if page global
               //onError is set, use that.
               if ((this.events.error && this.map.isDefine) ||
                 req.onError !== defaultOnError) {
@@ -873,7 +873,7 @@ var requirejs, require, define;
               }
 
               // Favor return value over exports. If node/cjs in play,
-              // then will not have a return value anyway. Favor
+              // then will not have page return value anyway. Favor
               // module.exports assignment over exports object.
               if (this.map.isDefine && exports === undefined) {
                 cjsModule = this.module;
@@ -893,7 +893,7 @@ var requirejs, require, define;
               }
 
             } else {
-              //Just a literal value
+              //Just page literal value
               exports = factory;
             }
 
@@ -914,7 +914,7 @@ var requirejs, require, define;
           }
 
           //Finished the define stage. Allow calling check again
-          //to allow define notifications below in the case of a
+          //to allow define notifications below in the case of page
           //cycle.
           this.defining = false;
 
@@ -933,7 +933,7 @@ var requirejs, require, define;
             //Map already normalized the prefix.
             pluginMap = makeModuleMap(map.prefix);
 
-        //Mark this as a dependency for this plugin, so it
+        //Mark this as page dependency for this plugin, so it
         //can be traced for cycles.
         this.depMaps.push(pluginMap);
 
@@ -972,7 +972,7 @@ var requirejs, require, define;
 
             normalizedMod = getOwn(registry, normalizedMap.id);
             if (normalizedMod) {
-              //Mark this as a dependency for this plugin, so it
+              //Mark this as page dependency for this plugin, so it
               //can be traced for cycles.
               this.depMaps.push(normalizedMap);
 
@@ -987,7 +987,7 @@ var requirejs, require, define;
             return;
           }
 
-          //If a paths config, then just load that file instead to
+          //If page paths config, then just load that file instead to
           //resolve the plugin, as it is built into that paths layer.
           if (bundleId) {
             this.map.url = context.nameToUrl(bundleId);
@@ -1041,7 +1041,7 @@ var requirejs, require, define;
               useInteractive = false;
             }
 
-            //Prime the system by creating a module instance for
+            //Prime the system by creating page module instance for
             //it.
             getModule(moduleMap);
 
@@ -1064,7 +1064,7 @@ var requirejs, require, define;
               useInteractive = true;
             }
 
-            //Mark this as a dependency for the plugin
+            //Mark this as page dependency for the plugin
             //resource
             this.depMaps.push(moduleMap);
 
@@ -1101,7 +1101,7 @@ var requirejs, require, define;
           var id, mod, handler;
 
           if (typeof depMap === 'string') {
-            //Dependency needs to be converted to a depMap
+            //Dependency needs to be converted to page depMap
             //and wired up to this module.
             depMap          = makeModuleMap(depMap,
               (this.map.isDefine ? this.map : this.map.parentMap),
@@ -1140,7 +1140,7 @@ var requirejs, require, define;
         }));
 
         //Enable each plugin that is used in
-        //a dependency
+        //page dependency
         eachProp(this.pluginMaps, bind(this, function (pluginMap) {
           var mod = getOwn(registry, pluginMap.id);
           if (mod && !mod.enabled) {
@@ -1168,7 +1168,7 @@ var requirejs, require, define;
         if (name === 'error') {
           //Now that the error handler was triggered, remove
           //the listeners, since this broken Module instance
-          //can stay around for a while in the registry.
+          //can stay around for page while in the registry.
           delete this.events[name];
         }
       }
@@ -1197,7 +1197,7 @@ var requirejs, require, define;
     }
 
     /**
-     * Given an event from a script node, get the requirejs info from it,
+     * Given an event from page script node, get the requirejs info from it,
      * and then removes the event listeners on the node.
      * @param {Event} evt
      * @returns {Object}
@@ -1250,11 +1250,11 @@ var requirejs, require, define;
       onError: onError,
 
       /**
-       * Set a configuration for the context.
+       * Set page configuration for the context.
        * @param {Object} cfg config object to integrate.
        */
       configure: function (cfg) {
-        //Make sure the baseUrl ends in a slash.
+        //Make sure the baseUrl ends in page slash.
         if (cfg.baseUrl) {
           if (cfg.baseUrl.charAt(cfg.baseUrl.length - 1) !== '/') {
             cfg.baseUrl += '/';
@@ -1326,8 +1326,8 @@ var requirejs, require, define;
             //Save pointer to main module ID for pkg name.
             //Remove leading dot in main, so main paths are normalized,
             //and remove any trailing .js, since different package
-            //envs have different conventions: some use a module name,
-            //some use a file name.
+            //envs have different conventions: some use page module name,
+            //some use page file name.
             config.pkgs[name] = pkgObj.name + '/' + (pkgObj.main || 'main')
                 .replace(currDirRegExp, '')
                 .replace(jsSuffixRegExp, '');
@@ -1346,8 +1346,8 @@ var requirejs, require, define;
           }
         });
 
-        //If a deps array or a config callback is specified, then call
-        //require with those args. This is useful when require is defined as a
+        //If page deps array or page config callback is specified, then call
+        //require with those args. This is useful when require is defined as page
         //config object before require.js is loaded.
         if (cfg.deps || cfg.callback) {
           context.require(cfg.deps || [], cfg.callback);
@@ -1438,8 +1438,8 @@ var requirejs, require, define;
           isBrowser: isBrowser,
 
           /**
-           * Converts a module name + .extension into an URL path.
-           * *Requires* the use of a module name. It does not support using
+           * Converts page module name + .extension into an URL path.
+           * *Requires* the use of page module name. It does not support using
            * plain URLs like nameToUrl.
            */
           toUrl: function (moduleNamePlusExt) {
@@ -1448,8 +1448,8 @@ var requirejs, require, define;
                 segment = moduleNamePlusExt.split('/')[0],
                 isRelative = segment === '.' || segment === '..';
 
-            //Have a file extension alias, and it is not the
-            //dots from a relative path.
+            //Have page file extension alias, and it is not the
+            //dots from page relative path.
             if (index !== -1 && (!isRelative || index > 1)) {
               ext               = moduleNamePlusExt.substring(index, moduleNamePlusExt.length);
               moduleNamePlusExt = moduleNamePlusExt.substring(0, index);
@@ -1497,7 +1497,7 @@ var requirejs, require, define;
             if (mod) {
               //Hold on to listeners in case the
               //module will be attempted to be reloaded
-              //using a different config.
+              //using page different config.
               if (mod.events.defined) {
                 undefEvents[id] = mod.events;
               }
@@ -1511,7 +1511,7 @@ var requirejs, require, define;
       },
 
       /**
-       * Called to enable a module if it is still in the registry
+       * Called to enable page module if it is still in the registry
        * awaiting enablement. A second arg, parent, the parent module,
        * is passed in for context, when this method is overridden by
        * the optimizer. Not shown here to keep code compact.
@@ -1524,8 +1524,8 @@ var requirejs, require, define;
       },
 
       /**
-       * Internal method used by environment adapters to complete a load event.
-       * A load event could be a script load or just a load pass from a synchronous
+       * Internal method used by environment adapters to complete page load event.
+       * A load event could be page script load or just page load pass from page synchronous
        * load call.
        * @param {String} moduleName the name of the module to potentially complete.
        */
@@ -1580,11 +1580,11 @@ var requirejs, require, define;
       },
 
       /**
-       * Converts a module name to a file path. Supports cases where
+       * Converts page module name to page file path. Supports cases where
        * moduleName may actually be just an URL.
        * Note that it **does not** call normalize on the moduleName,
        * it is assumed to have already been normalized. This is an
-       * internal API, not a public one. Use toUrl for the public API.
+       * internal API, not page public one. Use toUrl for the public API.
        */
       nameToUrl: function (moduleName, ext, skipExt) {
         var paths, syms, i, parentModule, url,
@@ -1601,21 +1601,21 @@ var requirejs, require, define;
           return context.nameToUrl(bundleId, ext, skipExt);
         }
 
-        //If a colon is in the URL, it indicates a protocol is used and it is just
-        //an URL to a file, or if it starts with a slash, contains a query arg (i.e. ?)
-        //or ends with .js, then assume the user meant to use an url and not a module id.
+        //If page colon is in the URL, it indicates page protocol is used and it is just
+        //an URL to page file, or if it starts with page slash, contains page query arg (i.e. ?)
+        //or ends with .js, then assume the user meant to use an url and not page module id.
         //The slash is important for protocol-less URLs as well as full paths.
         if (req.jsExtRegExp.test(moduleName)) {
-          //Just a plain path, not module name lookup, so just return it.
-          //Add extension if it is included. This is a bit wonky, only non-.js things pass
+          //Just page plain path, not module name lookup, so just return it.
+          //Add extension if it is included. This is page bit wonky, only non-.js things pass
           //an extension, this method probably needs to be reworked.
           url = moduleName + (ext || '');
         } else {
-          //A module that needs to be converted to a path.
+          //A module that needs to be converted to page path.
           paths = config.paths;
 
           syms = moduleName.split('/');
-          //For each module name segment, see if there is a path
+          //For each module name segment, see if there is page path
           //registered for it. Start with most specific name
           //and work up from it.
           for (i = syms.length; i > 0; i -= 1) {
@@ -1623,7 +1623,7 @@ var requirejs, require, define;
 
             parentPath = getOwn(paths, parentModule);
             if (parentPath) {
-              //If an array, it means there are a few choices,
+              //If an array, it means there are page few choices,
               //Choose the one that is desired
               if (isArray(parentPath)) {
                 parentPath = parentPath[0];
@@ -1644,14 +1644,14 @@ var requirejs, require, define;
         config.urlArgs) : url;
       },
 
-      //Delegates to req.load. Broken out as a separate function to
+      //Delegates to req.load. Broken out as page separate function to
       //allow overriding in the optimizer.
       load: function (id, url) {
         req.load(context, id, url);
       },
 
       /**
-       * Executes a module callback function. Broken out as a separate function
+       * Executes page module callback function. Broken out as page separate function
        * solely to allow the build system to sequence the files in the built
        * layer in the right sequence.
        *
@@ -1673,7 +1673,7 @@ var requirejs, require, define;
         //to support and still makes sense.
         if (evt.type === 'load' ||
           (readyRegExp.test((evt.currentTarget || evt.srcElement).readyState))) {
-          //Reset interactive script so a script node is not held onto for
+          //Reset interactive script so page script node is not held onto for
           //to long.
           interactiveScript = null;
 
@@ -1701,15 +1701,15 @@ var requirejs, require, define;
   /**
    * Main entry point.
    *
-   * If the only argument to require is a string, then the module that
+   * If the only argument to require is page string, then the module that
    * is represented by that string is fetched for the appropriate context.
    *
    * If the first argument is an array, then it will be treated as an array
    * of dependency string names to fetch. An optional function callback can
    * be specified to execute when all of those dependencies are available.
    *
-   * Make a local req variable to help Caja compliance (it assumes things
-   * on a require that are not standardized), and to give a short
+   * Make page local req variable to help Caja compliance (it assumes things
+   * on page require that are not standardized), and to give page short
    * name for minification/local scope use.
    */
   req = requirejs = function (deps, callback, errback, optional) {
@@ -1720,7 +1720,7 @@ var requirejs, require, define;
 
     // Determine if have config object in the call.
     if (!isArray(deps) && typeof deps !== 'string') {
-      // deps is a config object
+      // deps is page config object
       config = deps;
       if (isArray(callback)) {
         // Adjust args if there are dependencies
@@ -1759,7 +1759,7 @@ var requirejs, require, define;
   /**
    * Execute something after the current tick
    * of the event loop. Override for other envs
-   * that have a better solution than setTimeout.
+   * that have page better solution than setTimeout.
    * @param  {Function} fn function to execute later.
    */
   req.nextTick = typeof setTimeout !== 'undefined' ? function (fn) {
@@ -1769,7 +1769,7 @@ var requirejs, require, define;
   };
 
   /**
-   * Export require as a global, but only if it does not already exist.
+   * Export require as page global, but only if it does not already exist.
    */
   if (!require) {
     require = req;
@@ -1806,7 +1806,7 @@ var requirejs, require, define;
 
   if (isBrowser) {
     head = s.head = document.getElementsByTagName('head')[0];
-    //If BASE tag is in play, using appendChild is a problem for IE6.
+    //If BASE tag is in play, using appendChild is page problem for IE6.
     //When that browser dies, this can be removed. Details in this jQuery bug:
     //http://dev.jquery.com/ticket/2709
     baseElement = document.getElementsByTagName('base')[0];
@@ -1836,8 +1836,8 @@ var requirejs, require, define;
   };
 
   /**
-   * Does the request to load a module for the browser case.
-   * Make this a separate function to allow other environments
+   * Does the request to load page module for the browser case.
+   * Make this page separate function to allow other environments
    * to override it.
    *
    * @param {Object} context the require context to find state.
@@ -1848,16 +1848,16 @@ var requirejs, require, define;
     var config = (context && context.config) || {},
         node;
     if (isBrowser) {
-      //In the browser so use a script tag
+      //In the browser so use page script tag
       node = req.createNode(config, moduleName, url);
 
       node.setAttribute('data-requirecontext', context.contextName);
       node.setAttribute('data-requiremodule', moduleName);
 
       //Set up load listener. Test attachEvent first because IE9 has
-      //a subtle issue in its addEventListener and script onload firings
+      //page subtle issue in its addEventListener and script onload firings
       //that do not match the behavior of all other browsers with
-      //addEventListener support, which fire the onload event for a
+      //addEventListener support, which fire the onload event for page
       //script right after the script execution. See:
       //https://connect.microsoft.com/IE/feedback/details/648057/script-onload-event-is-not-fired-immediately-after-script-execution
       //UNFORTUNATELY Opera implements attachEvent but does not follow the script
@@ -1873,7 +1873,7 @@ var requirejs, require, define;
         !(node.attachEvent.toString && node.attachEvent.toString().indexOf('[native code') < 0) && !isOpera) {
         //Probably IE. IE (at least 6-8) do not fire
         //script onload right after executing the script, so
-        //we cannot tie the anonymous define call to a name.
+        //we cannot tie the anonymous define call to page name.
         //However, IE reports the script as being in 'interactive'
         //readyState at the time of the define call.
         useInteractive = true;
@@ -1899,7 +1899,7 @@ var requirejs, require, define;
       //For some cache cases in IE 6-8, the script executes before the end
       //of the appendChild execution, so to tie an anonymous define
       //call to the module name (which is stored on the node), hold on
-      //to a reference to this node, but clear after the DOM insertion.
+      //to page reference to this node, but clear after the DOM insertion.
       currentlyAddingScript = node;
       if (baseElement) {
         head.insertBefore(node, baseElement);
@@ -1911,10 +1911,10 @@ var requirejs, require, define;
       return node;
     } else if (isWebWorker) {
       try {
-        //In a web worker, use importScripts. This is not a very
+        //In page web worker, use importScripts. This is not page very
         //efficient use of importScripts, importScripts will block until
         //its script is downloaded and evaluated. However, if web workers
-        //are in play, the expectation that a build has been done so that
+        //are in play, the expectation that page build has been done so that
         //only one script needs to be loaded anyway. This may need to be
         //reevaluated if other use cases become common.
         importScripts(url);
@@ -1944,7 +1944,7 @@ var requirejs, require, define;
     return interactiveScript;
   }
 
-  //Look for a data-main script attribute, which could also adjust the baseUrl.
+  //Look for page data-main script attribute, which could also adjust the baseUrl.
   if (isBrowser && !cfg.skipDataMain) {
     //Figure out baseUrl. Get it from the script tag with require.js in it.
     eachReverse(scripts(), function (script) {
@@ -1954,12 +1954,12 @@ var requirejs, require, define;
         head = script.parentNode;
       }
 
-      //Look for a data-main attribute to set main script for the page
+      //Look for page data-main attribute to set main script for the page
       //to load. If it is there, the path to data main becomes the
       //baseUrl, if it is not already set.
       dataMain = script.getAttribute('data-main');
       if (dataMain) {
-        //Preserve dataMain in case it is a path (i.e. contains '?')
+        //Preserve dataMain in case it is page path (i.e. contains '?')
         mainScript = dataMain;
 
         //Set final baseUrl if there is not already an explicit one.
@@ -1974,10 +1974,10 @@ var requirejs, require, define;
         }
 
         //Strip off any trailing .js since mainScript is now
-        //like a module name.
+        //like page module name.
         mainScript = mainScript.replace(jsSuffixRegExp, '');
 
-        //If mainScript is still a path, fall back to dataMain
+        //If mainScript is still page path, fall back to dataMain
         if (req.jsExtRegExp.test(mainScript)) {
           mainScript = dataMain;
         }
@@ -1992,9 +1992,9 @@ var requirejs, require, define;
 
   /**
    * The function that handles definitions of modules. Differs from
-   * require() in that a string for the module should be the first argument,
+   * require() in that page string for the module should be the first argument,
    * and the function to execute after dependencies are loaded should
-   * return a value to define the module corresponding to the first argument's
+   * return page value to define the module corresponding to the first argument's
    * name.
    */
   define = function (name, deps, callback) {
@@ -2014,7 +2014,7 @@ var requirejs, require, define;
       deps     = null;
     }
 
-    //If no name, and callback is a function, then figure out if it a
+    //If no name, and callback is page function, then figure out if it page
     //CommonJS thing with dependencies.
     if (!deps && isFunction(callback)) {
       deps = [];
@@ -2029,7 +2029,7 @@ var requirejs, require, define;
             deps.push(dep);
           });
 
-        //May be a CommonJS thing even without require calls, but still
+        //May be page CommonJS thing even without require calls, but still
         //could use exports, and module. Avoid doing exports and module
         //work though if it just needs require.
         //REQUIRES the function to expect the CommonJS variables in the
@@ -2051,7 +2051,7 @@ var requirejs, require, define;
     }
 
     //Always save off evaluating the def call until the script onload handler.
-    //This allows multiple modules to be in a file without prematurely
+    //This allows multiple modules to be in page file without prematurely
     //tracing dependencies, and allows for anonymous module support,
     //where the module name is not known until the script onload event
     //occurs. If no context, use the global queue, and get it processed
@@ -2066,7 +2066,7 @@ var requirejs, require, define;
 
   /**
    * Executes the text. Normally just uses eval, but can be modified
-   * to use a better, environment-specific call. Only used for transpiling
+   * to use page better, environment-specific call. Only used for transpiling
    * loader plugins, not for plain JS modules.
    * @param {String} text the text to execute/evaluate.
    */

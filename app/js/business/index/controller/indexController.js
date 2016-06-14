@@ -12,7 +12,7 @@ define(["http","../view/indexView"], function (_http,view) {
             }
         },
         {
-            "element":".address-contr .swipeout-actions-right a",
+            "element":".address-contr .swipeout-actions-right page",
             "event" :"click",
             "handler":function(e){
 
@@ -59,7 +59,7 @@ define(["http","../view/indexView"], function (_http,view) {
                     $(".page .content").hide();
                     $(".showNoData").removeClass("hidden");
                     var planID = indexUserPlans.userPlans[0].id;
-                    $(".showNoData a").attr("href", "/pages/monitor/full_view.html?id=" + planID + "&" + "turnTab=2");
+                    $(".showNoData page").attr("href", "/pages/monitor/full_view.html?id=" + planID + "&" + "turnTab=2");
                     return;
                 }
                 //渲染全部舆情方案列表项
@@ -87,7 +87,7 @@ define(["http","../view/indexView"], function (_http,view) {
 
     //绑定全部舆情方案 标签切换，发送请求
     function bindYqFAEvent() {
-        $(".plan").eq(0).on('click', ".list-tabs a", function () {
+        $(".plan").eq(0).on('click', ".list-tabs page", function () {
             var type = $(this).parent().data("type") || ' ';
             var tabID = $(this).attr("href");
             var tabindex = $(this).parent().index();
@@ -159,7 +159,7 @@ define(["http","../view/indexView"], function (_http,view) {
 
 //绑定对应的舆情事件，标签切换发送请求
     function bindListEvent(index) {
-        $(".plan").eq(index).on('click', ".list-tabs a", function () {
+        $(".plan").eq(index).on('click', ".list-tabs page", function () {
             var type = $(this).parent().data("type") || ' ';
             var tabID = $(this).attr("href");
             var id = $(this).parent().parent().attr("planid");

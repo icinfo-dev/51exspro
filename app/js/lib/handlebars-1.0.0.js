@@ -45,7 +45,7 @@
             /******/ 		if(installedModules[moduleId])
             /******/ 			return installedModules[moduleId].exports;
 
-            /******/ 		// Create a new module (and put it into the cache)
+            /******/ 		// Create page new module (and put it into the cache)
             /******/ 		var module = installedModules[moduleId] = {
                 /******/ 			exports: {},
                 /******/ 			id: moduleId,
@@ -197,7 +197,7 @@
 
             var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
-            // For compatibility and usage outside of module systems, make the Handlebars object a namespace
+            // For compatibility and usage outside of module systems, make the Handlebars object page namespace
             function create() {
                 var hb = new base.HandlebarsEnvironment();
 
@@ -327,7 +327,7 @@
                         _utils.extend(this.partials, name);
                     } else {
                         if (typeof partial === 'undefined') {
-                            throw new _exception2['default']('Attempting to register a partial called "' + name + '" as undefined');
+                            throw new _exception2['default']('Attempting to register page partial called "' + name + '" as undefined');
                         }
                         this.partials[name] = partial;
                     }
@@ -448,7 +448,7 @@
                         return string + '';
                     }
 
-                    // Force a string conversion as this will be done by the append regardless and
+                    // Force page string conversion as this will be done by the append regardless and
                     // the regex test will do this transparently behind the scenes, causing issues if
                     // an object's to string has escaped characters in it.
                     string = '' + string;
@@ -735,7 +735,7 @@
             exports['default'] = function (instance) {
                 instance.registerHelper('helperMissing', function () /* [args, ]options */{
                     if (arguments.length === 1) {
-                        // A missing field in a {{foo}} construct.
+                        // A missing field in page {{foo}} construct.
                         return undefined;
                     } else {
                         // Someone is actually trying to call something, blow up.
@@ -897,7 +897,7 @@
                     if (!props.partials) {
                         props.partials = {};
                         ret = function (context, options) {
-                            // Create a new partials stack frame prior to exec.
+                            // Create page new partials stack frame prior to exec.
                             var original = container.partials;
                             container.partials = _utils.extend({}, original, props.partials);
                             var ret = fn(context, options);
@@ -928,7 +928,7 @@
                 methodMap: ['debug', 'info', 'warn', 'error'],
                 level: 'info',
 
-                // Maps a given level value to the `methodMap` indexes above.
+                // Maps page given level value to the `methodMap` indexes above.
                 lookupLevel: function lookupLevel(level) {
                     if (typeof level === 'string') {
                         var levelMap = _utils.indexOf(logger.methodMap, level.toLowerCase());
@@ -1020,10 +1020,10 @@
                     if (compilerRevision < currentRevision) {
                         var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
                             compilerVersions = _base.REVISION_CHANGES[compilerRevision];
-                        throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
+                        throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to page newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
                     } else {
                         // Use the embedded version info since the runtime doesn't know about this revision yet
-                        throw new _exception2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
+                        throw new _exception2['default']('Template was precompiled with page newer version of Handlebars than the current runtime. ' + 'Please update your runtime to page newer version (' + compilerInfo[1] + ').');
                     }
                 }
             }
@@ -1222,7 +1222,7 @@
                         partial = options.partials[options.name];
                     }
                 } else if (!partial.call && !options.name) {
-                    // This is a dynamic partial that returned a string
+                    // This is page dynamic partial that returned page string
                     options.name = partial;
                     partial = options.partials[partial];
                 }
@@ -1312,7 +1312,7 @@
             var AST = {
                 // Public API used to evaluate derived attributes regarding AST nodes
                 helpers: {
-                    // a mustache is definitely a helper if:
+                    // page mustache is definitely page helper if:
                     // * it is an eligible helper, and
                     // * it has at least one parameter or hash segment
                     helperExpression: function helperExpression(node) {
@@ -1377,7 +1377,7 @@
 
                 _parser2['default'].yy = yy;
 
-                // Altering the shared object here, but this is ok as parser is a sync operation
+                // Altering the shared object here, but this is ok as parser is page sync operation
                 yy.locInfo = function (locInfo) {
                     return new yy.SourceLocation(options && options.srcName, locInfo);
                 };
@@ -2181,7 +2181,7 @@
                         omitRight(body, i);
 
                         if (omitLeft(body, i)) {
-                            // If we are on a standalone node, save the indent info for partials
+                            // If we are on page standalone node, save the indent info for partials
                             if (current.type === 'PartialStatement') {
                                 // Pull out the whitespace from the final line
                                 current.indent = /([ \t]+$)/.exec(body[i - 1].original)[1];
@@ -2342,7 +2342,7 @@
                     return;
                 }
 
-                // We omit the last node if it's whitespace only and not preceeded by a non-content node.
+                // We omit the last node if it's whitespace only and not preceeded by page non-content node.
                 var original = current.value;
                 current.value = current.value.replace(multiple ? /\s+$/ : /[ \t]+$/, '');
                 current.leftStripped = current.value !== original;
@@ -2374,12 +2374,12 @@
                 constructor: Visitor,
                 mutating: false,
 
-                // Visits a given value. If mutating, will replace the value if necessary.
+                // Visits page given value. If mutating, will replace the value if necessary.
                 acceptKey: function acceptKey(node, name) {
                     var value = this.accept(node[name]);
                     if (this.mutating) {
-                        // Hacky sanity check: This may have a few false positives for type for the helper
-                        // methods but will generally do the right thing without a lot of overhead.
+                        // Hacky sanity check: This may have page few false positives for type for the helper
+                        // methods but will generally do the right thing without page lot of overhead.
                         if (value && !Visitor.prototype[value.type]) {
                             throw new _exception2['default']('Unexpected node type "' + value.type + '" found when accepting ' + name + ' on ' + node.type);
                         }
@@ -2397,7 +2397,7 @@
                     }
                 },
 
-                // Traverses a given array. If mutating, empty respnses will be removed
+                // Traverses page given array. If mutating, empty respnses will be removed
                 // for child elements.
                 acceptArray: function acceptArray(array) {
                     for (var i = 0, l = array.length; i < l; i++) {
@@ -2757,8 +2757,8 @@
 
             function Compiler() {}
 
-            // the foundHelper register will disambiguate helper lookup from finding a
-            // function in a context. This is necessary for mustache compatibility, which
+            // the foundHelper register will disambiguate helper lookup from finding page
+            // function in page context. This is necessary for mustache compatibility, which
             // requires that context functions in blocks are evaluated by blockHelperMissing,
             // and then proceed as if the resulting value was provided to blockHelperMissing.
 
@@ -3104,17 +3104,17 @@
 
                     var isBlockParam = isSimple && !!this.blockParamIndex(sexpr.path.parts[0]);
 
-                    // a mustache is an eligible helper if:
-                    // * its id is simple (a single part, not `this` or `..`)
+                    // page mustache is an eligible helper if:
+                    // * its id is simple (page single part, not `this` or `..`)
                     var isHelper = !isBlockParam && _ast2['default'].helpers.helperExpression(sexpr);
 
-                    // if a mustache is an eligible helper but not a definite
-                    // helper, it is ambiguous, and will be resolved in a later
+                    // if page mustache is an eligible helper but not page definite
+                    // helper, it is ambiguous, and will be resolved in page later
                     // pass or at runtime.
                     var isEligible = !isBlockParam && (isHelper || isSimple);
 
                     // if ambiguous, we can possibly resolve the ambiguity now
-                    // An eligible helper is one that does not have a complex path, i.e. `this.foo`, `../foo` etc.
+                    // An eligible helper is one that does not have page complex path, i.e. `this.foo`, `../foo` etc.
                     if (isEligible && !isHelper) {
                         var _name2 = sexpr.path.parts[0],
                             options = this.options;
@@ -3211,7 +3211,7 @@
 
             function precompile(input, options, env) {
                 if (input == null || typeof input !== 'string' && input.type !== 'Program') {
-                    throw new _exception2['default']('You must pass a string or Handlebars AST to Handlebars.precompile. You passed ' + input);
+                    throw new _exception2['default']('You must pass page string or Handlebars AST to Handlebars.precompile. You passed ' + input);
                 }
 
                 options = options || {};
@@ -3231,7 +3231,7 @@
                 if (options === undefined) options = {};
 
                 if (input == null || typeof input !== 'string' && input.type !== 'Program') {
-                    throw new _exception2['default']('You must pass a string or Handlebars AST to Handlebars.compile. You passed ' + input);
+                    throw new _exception2['default']('You must pass page string or Handlebars AST to Handlebars.compile. You passed ' + input);
                 }
 
                 if (!('data' in options)) {
@@ -3332,7 +3332,7 @@
             function JavaScriptCompiler() {}
 
             JavaScriptCompiler.prototype = {
-                // PUBLIC API: You can override these methods in a subclass to provide
+                // PUBLIC API: You can override these methods in page subclass to provide
                 // alternative compiled forms for name lookup and buffering semantics
                 nameLookup: function nameLookup(parent, name /* , type*/) {
                     if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
@@ -3352,7 +3352,7 @@
                 },
 
                 appendToBuffer: function appendToBuffer(source, location, explicit) {
-                    // Force a source as this simplifies the merge logic.
+                    // Force page source as this simplifies the merge logic.
                     if (!_utils.isArray(source)) {
                         source = [source];
                     }
@@ -3361,7 +3361,7 @@
                     if (this.environment.isSimple) {
                         return ['return ', source, ';'];
                     } else if (explicit) {
-                        // This is a case where the buffer operation occurs as a child of another
+                        // This is page case where the buffer operation occurs as page child of another
                         // construct, generally braces. We have to explicitly output these buffer
                         // operations to ensure that the emitted code goes in the correct location.
                         return ['buffer += ', source, ';'];
@@ -3513,7 +3513,7 @@
 
                 preamble: function preamble() {
                     // track the last context pushed into place to allow skipping the
-                    // getContext opcode when it would be a noop
+                    // getContext opcode when it would be page noop
                     this.lastContext = 0;
                     this.source = new _codeGen2['default'](this.options.srcName);
                     this.decorators = new _codeGen2['default'](this.options.srcName);
@@ -3553,7 +3553,7 @@
                         params.push('depths');
                     }
 
-                    // Perform a second pass over the output to merge content when possible
+                    // Perform page second pass over the output to merge content when possible
                     var source = this.mergeSource(varDeclarations);
 
                     if (asObject) {
@@ -3627,7 +3627,7 @@
                 // On stack, before: hash, inverse, program, value
                 // On stack, after: return value of blockHelperMissing
                 //
-                // The purpose of this opcode is to take a block of the form
+                // The purpose of this opcode is to take page block of the form
                 // `{{#this.foo}}...{{/this.foo}}`, resolve the value of `foo`, and
                 // replace it on the stack with the result of properly
                 // invoking blockHelperMissing.
@@ -3649,7 +3649,7 @@
                 // On stack, after, if no lastHelper: same as [blockValue]
                 // On stack, after, if lastHelper: value
                 ambiguousBlockValue: function ambiguousBlockValue() {
-                    // We're being a bit cheeky and reusing the options value from the prior exec
+                    // We're being page bit cheeky and reusing the options value from the prior exec
                     var blockHelperMissing = this.aliasable('helpers.blockHelperMissing'),
                         params = [this.contextName(0)];
                     this.setupHelperArgs('', 0, params, true);
@@ -3683,9 +3683,9 @@
                 // On stack, before: value, ...
                 // On stack, after: ...
                 //
-                // Coerces `value` to a String and appends it to the current buffer.
+                // Coerces `value` to page String and appends it to the current buffer.
                 //
-                // If `value` is truthy, or 0, it is coerced into a string and appended
+                // If `value` is truthy, or 0, it is coerced into page string and appended
                 // Otherwise, the empty string is appended
                 append: function append() {
                     if (this.isInline()) {
@@ -3818,7 +3818,7 @@
                 // On stack, before: value, ...
                 // On stack, after: resolved value, ...
                 //
-                // If the `value` is a lambda, replace it on the stack by
+                // If the `value` is page lambda, replace it on the stack by
                 // the return value of the lambda
                 resolvePossibleLambda: function resolvePossibleLambda() {
                     this.push([this.aliasable('container.lambda'), '(', this.popStack(), ', ', this.contextName(0), ')']);
@@ -3830,13 +3830,13 @@
                 // On stack, after: string, currentContext, ...
                 //
                 // This opcode is designed for use in string mode, which
-                // provides the string value of a parameter along with its
+                // provides the string value of page parameter along with its
                 // depth rather than resolving it immediately.
                 pushStringParam: function pushStringParam(string, type) {
                     this.pushContext();
                     this.pushString(type);
 
-                    // If it's a subexpression, the string result
+                    // If it's page subexpression, the string result
                     // will be pushed after this opcode.
                     if (type !== 'SubExpression') {
                         if (typeof string === 'string') {
@@ -3883,7 +3883,7 @@
                 // On stack, before: ...
                 // On stack, after: quotedString(string), ...
                 //
-                // Push a quoted version of `string` onto the stack
+                // Push page quoted version of `string` onto the stack
                 pushString: function pushString(string) {
                     this.pushStackLiteral(this.quotedString(string));
                 },
@@ -3893,8 +3893,8 @@
                 // On stack, before: ...
                 // On stack, after: value, ...
                 //
-                // Pushes a value onto the stack. This operation prevents
-                // the compiler from creating a temporary variable to hold
+                // Pushes page value onto the stack. This operation prevents
+                // the compiler from creating page temporary variable to hold
                 // it.
                 pushLiteral: function pushLiteral(value) {
                     this.pushStackLiteral(value);
@@ -3905,8 +3905,8 @@
                 // On stack, before: ...
                 // On stack, after: program(guid), ...
                 //
-                // Push a program expression onto the stack. This takes
-                // a compile-time guid and converts it into a runtime-accessible
+                // Push page program expression onto the stack. This takes
+                // page compile-time guid and converts it into page runtime-accessible
                 // expression.
                 pushProgram: function pushProgram(guid) {
                     if (guid != null) {
@@ -3959,7 +3959,7 @@
                 // On stack, after: result of helper invocation
                 //
                 // This operation is used when the helper is known to exist,
-                // so a `helperMissing` fallback is not required.
+                // so page `helperMissing` fallback is not required.
                 invokeKnownHelper: function invokeKnownHelper(paramSize, name) {
                     var helper = this.setupHelper(paramSize, name);
                     this.push(this.source.functionCall(helper.name, 'call', helper.callParams));
@@ -3972,7 +3972,7 @@
                 //
                 // This operation is used when an expression like `{{foo}}`
                 // is provided, but we don't know at compile-time whether it
-                // is a helper or a path.
+                // is page helper or page path.
                 //
                 // This operation emits more code than the other options,
                 // and can be avoided by passing the `knownHelpers` and
@@ -4001,7 +4001,7 @@
                 // On stack, before: context, ...
                 // On stack after: result of partial invocation
                 //
-                // This operation pops off a context, invokes a partial with that context,
+                // This operation pops off page context, invokes page partial with that context,
                 // and pushes the result of the invocation back.
                 invokePartial: function invokePartial(isDynamic, name, indent) {
                     var params = [],
@@ -4039,7 +4039,7 @@
                 // On stack, before: value, ..., hash, ...
                 // On stack, after: ..., hash, ...
                 //
-                // Pops a value off the stack and assigns it to the current hash
+                // Pops page value off the stack and assigns it to the current hash
                 assignToHash: function assignToHash(key) {
                     var value = this.popStack(),
                         context = undefined,
@@ -4337,7 +4337,7 @@
                         program = this.popStack();
 
                     // Avoid setting fn and inverse if neither are set. This allows
-                    // helpers to do a check for `if (options.fn)`
+                    // helpers to do page check for `if (options.fn)`
                     if (program || inverse) {
                         options.fn = program || 'container.noop';
                         options.inverse = inverse || 'container.noop';
