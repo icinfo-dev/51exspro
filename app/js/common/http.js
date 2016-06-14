@@ -1,7 +1,7 @@
 /**
  * http请求工具
  */
-define(['jquery', 'layer', 'config', 'util'], function ($, layer, config, util) {
+define(['jquery', 'layer', 'common/config', 'common/util'], function ($, layer, config, util) {
     // http请求队列
     var httpQueue = [];
 
