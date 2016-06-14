@@ -1,4 +1,4 @@
-define(function(){
+define(['handlebars'],function(handlebars){
     handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
         switch (operator) {
             case '!=':
@@ -55,4 +55,14 @@ define(function(){
         }
         return span;
     });
+    handlebars.registerHelper("isCheck", function (v1, v2, options) {
+        if(v1=="" || typeof v1=="undefined"){
+            return '';
+        }
+        if(v1){
+            return 'checked';
+        }
+        return '';
+    });
 })
+
