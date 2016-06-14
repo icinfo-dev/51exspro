@@ -161,6 +161,6 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             // 去除空格
             trims: trims,
             showLoading: showLoading,
-            removeLoading: removeLoading,
+            removeLoading: removeLoading
         };
     });
