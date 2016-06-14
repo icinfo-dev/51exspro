@@ -1,14 +1,14 @@
 <div class="nav-bg">
     <div class="nav-main">
-        <script type="text/x-handlebars-template">
+        <script id="userlistTemplate" type="text/x-handlebars-template">
             <ul class="clearfix listbox">
                 <li class="active list1"><a href="#">首页</a></li>
                 {{#each this}}
                 <li data-id="{{this.id}}"><a href="/pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
-                        class="nav-delete" id="nav-list{{@index}}" data-toggle="modal" data-target=".plan-delete"><img
-                        src="img/delete-icon.png" alt=""></i></li>
+                        class="nav-delete js-nav-delete" id="nav-list{{@index}}"><img
+                        src="../../img/delete-icon.png" alt=""></i></li>
                 {{/each}}
-                <li class="nav-new"><a href="javascript:void(0)"><img src="img/plus.png" alt="">新建舆情</a></li>
+                <li class="nav-new"><a href="javascript:void(0)" class="js-nav-new"><img src="../../img/plus.png" alt="">新建舆情</a></li>
         </script>
         </ul>
     </div>

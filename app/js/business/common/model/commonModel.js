@@ -1,12 +1,80 @@
-define([], function (config) {
+define(['common/config', 'common/http'], function (config, http) {
 
-  function _getMenuData(){
-    var callback = arguments[0];
-    var data = {"data":[{title:"2323232"}]};
-    callback(data.data);
-  }
-  // ����
-  return {
-    getMenuData: _getMenuData
-  }
+    /**
+     * 获取用户信息
+     * @param options
+     */
+    function getUserInfo(options) {
+        http.httpRequest({
+            interface: 'getuserinfo',
+            success: options.callBack
+        });
+    }
+
+    /**
+     * 获取预警中心信息
+     * @param options
+     */
+    function getLatestUserWarnCount(options) {
+        http.httpRequest({
+            interface: 'getlatestuserwarncount',
+            success: options.callBack
+        });
+    }
+
+    /**
+     *添加用户预警关注记录
+     * @param options
+     */
+    function addWarnFocusRecord(options) {
+        http.httpRequest({
+            interface: 'addwarnfocusrecord',
+            complete: options.callBack
+        });
+    }
+
+    /**
+     *添加用户预警关注记录
+     * @param options
+     */
+    function getUserPlanList(options) {
+        http.httpRequest({
+            interface: 'getuserplanlist',
+            success: options.callBack
+        });
+    }
+
+    /**
+     * 新建舆情
+     * @param options
+     */
+    function canAddNewUserPlan(options) {
+        http.httpRequest({
+            interface: 'canaddnewuserplan',
+            success: options.callBack
+        });
+    }
+
+    /**
+     * 删除舆情
+     * @param options
+     */
+    function deleteUserPlan(options) {
+        http.httpRequest({
+            interface: 'deleteuserplan',
+            data: options.data,
+            type: 'post',
+            success: options.callBack
+        });
+    }
+
+    // 返回
+    return {
+        getUserInfo: getUserInfo,
+        getLatestUserWarnCount: getLatestUserWarnCount,
+        addWarnFocusRecord: addWarnFocusRecord,
+        getUserPlanList: getUserPlanList,
+        canAddNewUserPlan: canAddNewUserPlan,
+        deleteUserPlan: deleteUserPlan
+    }
 });
