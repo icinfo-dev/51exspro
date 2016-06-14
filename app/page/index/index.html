@@ -19,11 +19,10 @@
 </head>
 
 <body>
-<header data-render=true data-model="header"></header>
-
+<div id="header" data-render="header"></div>
 <div class="page page-index" data-module="index" data-controller="index">
     <!-- 导航开始 -->
-    <menu data-render=true data-model="menu"></menu>
+    <div data-render="menu" id="menu"></div>
     <!-- 导航结束 -->
     <!-- 主体内容开始 -->
     <div class="main content">
@@ -407,7 +406,7 @@
 
     <!-- 主体内容结束 -->
 </div>
-<footer data-render=true data-model="footer"></footer>
+<div id="footer" data-render="footer"></div>
 <!-- 底部结束 -->
 <script src="/js/business/config.js"></script>
 <script data-main="business/app" src="/js/lib/require.js"></script>
