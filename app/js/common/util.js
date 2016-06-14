@@ -122,7 +122,7 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
      * }}
          */
         var loadingTypeConfig = {
-            1: '<div class="loading"><img class="loading-img" src="../../img/loading_48.gif" /></div>'
+            'large': '<div class="loading loading-large"><img class="loading-img" src="../../img/loading_48.gif" /></div>'
         }
 
         /**
@@ -134,18 +134,6 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             var ele = $(ele);
             var html = loadingTypeConfig[type];
             ele.append(html);
-            var loading = ele.find('.loading');
-            var loadingImg = loading.find('.loading-img');
-            var w = loadingImg.width();
-            var h = loadingImg.height();
-            loading.css({'position': 'relative', 'width': '100%', 'height': '100%'});
-            loadingImg.css({
-                'marginLeft': (-1) * w / 2 + 'px',
-                'marginTop': (-1) * h / 2 + 'px',
-                'position': 'absolute',
-                'top': '50%',
-                'left': '50%'
-            });  //垂直居中
         }
 
         /**
@@ -154,111 +142,9 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
          */
         function removeLoading(ele) {
             var ele = $(ele);
-            ele.find('.loading').remove();
+            ele.find('loading').remove();
         }
 
-        /**
-         * 显示弹框
-         */
-        function _showModal(ele){
-            require(['text!/js/business/common/template/modal.html'],function(_modal){
-                var selector = $("body").find(ele);
-                !selector.length && $("body").append($(_modal).filter(ele));
-                selector.on('show.bs.modal', function (e) {
-
-                })
-                selector.modal('show');
-            });
-        }
-        /**
-         * 弹出框 alert
-         * @param  string(显示内容)
-         */
-        function _alert(content,title) {
-            var title = title || '温馨提示';
-            if (!content)
-                return;
-            if($("body .commonAlert").length == 0){
-
-            }else{
-                $("body .commonAlert").find(".cy-model-content").html(content);
-                $("body .commonAlert").modal('show');
-            }
-            require(['text!/js/business/common/template/modal.html'],function(_modal){
-                $("body").append($(_modal).filter(".commonAlert"));
-                $("body .commonAlert").find(".modal-title").html(title);
-                $("body .commonAlert").find(".cy-model-content").html(content);
-                $("body .commonAlert").modal('show');
-            });
-
-
-        }
-
-        /**
-         * 弹出框 alert
-         * @param  string(显示内容),callback(点击确认回调),callback(点击取消回调)
-         */
-        function _confirm(content, fn1, fn2) {
-            if (!content)
-                return;
-            $(".commonConfirm").length == 0 && $("body").append($(_modal).filter(".commonConfirm"));
-            $(".commonConfirm").find(".cy-model-content").html(content);
-            $(".commonConfirm").modal('show');
-        }
-
-        function _refresh(tar,data,template) {
-            var html;
-            if(template){
-                html = template;
-                if($(html).find("script").length==0||data==""){
-                    tar.html(html);
-                }else{
-                    var myTemplate = handlebars.compile($(html).find("script").html());
-                    tar.html(myTemplate(data));
-                }
-            }else{
-                var keyArr = tar.data("model").split(" ");
-                var key = keyArr[0];
-                var requirePath = "text!/js/business/common/template/";
-                requirePath += key+'.html';
-                require([requirePath],function(_model){
-                    if(keyArr[1]){
-                        html = $(_model).filter(keyArr[1]).html();
-                    }else{
-                        html = _model;
-                    }
-                    if($(html).find("script").length==0||data==""){
-                        tar.html(html);
-                    }else{
-                        var myTemplate = handlebars.compile($(html).find("script").html());
-                        tar.html(myTemplate(data));
-                    }
-                });
-            }
-
-        }
-        function _render(tar,callback){
-            if(!tar.data("model"))
-                return;
-            var html;
-            var keyArr = tar.data("model").split(" ");
-            var key = keyArr[0];
-            var requirePath = "text!/js/business/common/template/";
-            requirePath += key+'.html';
-            require([requirePath],function(_model){
-                if(keyArr[1]){
-                    html = $(_model).filter(keyArr[1]).html();
-                }else{
-                    html = _model;
-                }
-                tar.html(html);
-                if(tar.find("script").length!=0){
-                    tar.find("script").parent().data("model",tar.data("model"));
-                }
-                $.isFunction(callback) && callback();
-            });
-        }
-        // 返回
         return {
             // 事件绑定
             bindEvents: bindEvents,
@@ -276,11 +162,5 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             trims: trims,
             showLoading: showLoading,
             removeLoading: removeLoading,
-            //modal 弹出 comfirm
-            confirm: _confirm,
-            alert: _alert,
-            render: _render,
-            template :_refresh,
-            showModal: _showModal
         };
     });
