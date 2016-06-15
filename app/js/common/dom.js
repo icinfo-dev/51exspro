@@ -1,13 +1,17 @@
 /**
  * dom操作
  */
-define([],function(){
+define(['jquery'],function($){
 
     // html代码段集合
     var htmlMap = {
-        'loading_large': '<div class="loading loading-large"><img class="loading-img" src="../../img/loading_48.gif" /></div>',
-        'loading_middle':'<div class="loading loading-middle"><img class="loading-img" src="../../img/loading_32_.gif" /></div>',
-        'loading_small':'<div class="loading loading-small"><img class="loading-img" src="../../img/loading_16_.gif" /></div>'
+        '1': '<div class="js-placeholder loading-large"><img class="loading-img" src="../../img/loading_48.gif" /></div>',
+        '2': '<div class="js-placeholder loading-middle"><img class="loading-img" src="../../img/loading_32_.gif" /></div>',
+        '3': '<div class="js-placeholder loading-small"><img class="loading-img" src="../../img/loading_16_.gif" /></div>',
+        '4': '<div class="js-placeholder emptyData"><p>对不起！没有您需要的数据</p><img src="../../img/index_none.png" alt=""></div>',
+        '5': '<div class="js-placeholder emptyData"><p>对不起！没有您需要的数据</p><a href="/pages/newYq.html">新建舆情 — — 请点击这里！</a><img src="../../img/index_none.png" alt=""></div>',
+        '6': '<div class="js-placeholder emptyData"><p>暂无数据</p></div>',
+        '7': '<div class="js-placeholder emptyData"><p>加载失败</p></div>'
     };
 
 
@@ -17,9 +21,9 @@ define([],function(){
      * @param ele string(selector)
      * @param type string
      */
-    function showLoading(ele, type) {
+    function showPlaceholder(ele, type) {
         var ele = $(ele);
-        var html = loadingTypeConfig[type];
+        var html = htmlMap[type];
         ele.append(html);
     }
 
@@ -27,9 +31,9 @@ define([],function(){
      * 删除加载占位符
      * @param ele string(selector)
      */
-    function removeLoading(ele) {
+    function removePlaceholder(ele) {
         var ele = $(ele);
-        ele.find('loading').remove();
+        ele.find('.js-placeholder').remove();
     }
 
     /**
@@ -47,16 +51,22 @@ define([],function(){
             value = '';
         $.each(info.selectList, function (i, v) {
             for (var index = 0; index < info.fields.length; index++) {
-                key = info.inputName + "[" + i + "]." + info.fields[index];
+                key = info.inputName + '[' + i + '].' + info.fields[index];
                 value = $(this).data(info.fields[index].toLowerCase());
-                if (typeof value == "undefined") {
-                    value = "";
+                if (typeof value == 'undefined') {
+                    value = '';
                 }
                 form += '<input name="' + key + '" value="' + value + '" />';
             }
         });
-        form += "</form>";
+        form += '</form>';
         return form;
     }
 
+
+    return {
+        showPlaceholder: showPlaceholder,
+        removePlaceholder: removePlaceholder,
+        generateDldForm: generateDldForm
+    }
 });
