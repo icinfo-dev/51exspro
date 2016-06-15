@@ -1,7 +1,7 @@
 /**
  * http请求工具
  */
-define(['jquery', 'layer', 'common/config', 'common/util'], function ($, layer, config, util) {
+define(['jquery', 'layer', 'common/config', 'common/util', 'common/dom'], function ($, layer, config, util, dom) {
     // http请求队列
     var httpQueue = [];
 
@@ -37,7 +37,7 @@ define(['jquery', 'layer', 'common/config', 'common/util'], function ($, layer, 
         //执行默认动作
         if (opt.defaultAction) {
             opt.beforeSend = function () {
-                util.showLoading(opt.actionConfig.dom, opt.actionConfig.type);
+                dom.showPlaceholder(opt.actionConfig.dom, opt.actionConfig.type);
             }
         }
 
@@ -53,12 +53,12 @@ define(['jquery', 'layer', 'common/config', 'common/util'], function ($, layer, 
 
             // 执行默认动作
             if (opt.defaultAction) {
-                util.removeLoading(opt.actionConfig.dom);
+                dom.removePlaceholder(opt.actionConfig.dom);
             }
 
             // 执行默认异常动作
             if (opt.defaultAction && data.status != '100') {
-                util.showError(opt.actionConfig.dom, opt.actionConfig.type);
+                dom.showPlaceholder(opt.actionConfig.dom, opt.actionConfig.type);
                 return;
             }
 
@@ -66,9 +66,10 @@ define(['jquery', 'layer', 'common/config', 'common/util'], function ($, layer, 
             options.success && options.success(data);
         };
         // 失败回调
-        opt.error = function () {debugger;
+        opt.error = function () {
+            debugger;
             if (opt.defaultAction) {
-                util.showError(opt.actionConfig.dom, opt.actionConfig.type);
+                dom.showPlaceholder(opt.actionConfig.dom, opt.actionConfig.type);
             }
             options.error && options.error();
         };
