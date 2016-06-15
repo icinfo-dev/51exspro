@@ -1,4 +1,4 @@
-define(['require','common/util','business/common/model/commonModel','handlebars','layer'], function (require,util,model,handlebars) {
+define(['require','common/util','business/common/model/commonModel','handlebars','layer','common/hbsHelper'], function (require,util,model,handlebars) {
 
     /**
      * 公用事件绑定
@@ -33,7 +33,7 @@ define(['require','common/util','business/common/model/commonModel','handlebars'
             scrollTime:200
         });
 
-        var ele = $("body").find("[data-render]")||[];
+        var ele = $('body').find('[data-render]')||[];
         $.each(ele,function(index,value){
             var name = $(this).data('render');
             var str = name.substr(1).toLowerCase();
@@ -193,6 +193,137 @@ define(['require','common/util','business/common/model/commonModel','handlebars'
     }
 
     /**
+     * 渲染email
+     */
+    function renderEmail(options){
+        require(['text!business/common/template/email.html'],function(template){
+            var emailObj = {}; //保存已添加的邮箱作缓存用
+            !$('#add-email-box').length && $('body').append(template);
+            _getWarnEmailList();
+            _bind();
+            //获取预警邮箱
+            function _getWarnEmailList(){
+                model.getWarnEmailList({
+                    callBack: function(data){
+                        $('.add-email-ul').html(handlebars.compile($('#addEmailTemplate').html())(data));
+                        $("#emailForm input[type=email]").val("");
+                        $(".add-email-list").find(".text-danger").text("");
+                        $("#emailForm").attr("novalidate","false");
+                        layer.open({
+                            type: 1,
+                            title: options.title,
+                            content: $('#add-email-box'),
+                            area: '500px',
+                            btn: ['发送邮件','取消'],
+                            yes: function(){
+
+                            }
+                        })
+                        for(var i = 0; i < data.data.length;i++){
+                            emailObj[data.data[i]] = data.data[i];
+                        };
+                    }
+                })
+            }
+            //添加邮箱
+            function _addEmail(){debugger;
+                var checkedLength = $(".add-email-list :checked").length;
+                var shareEmailList = [];
+                var otherEmailList = [];
+                if(checkedLength <= 5 && checkedLength > 0){
+                    $(".add-email-list :checkbox").each(function(){
+                        var emailStr = $(this).parents("li").text();
+                        if($(this).is(":checked")){
+                            shareEmailList.push(emailStr);
+                        }else{
+                            otherEmailList.push(emailStr);
+                        }
+                    });
+                    _sendEmail(docId,shareEmailList,otherEmailList);
+                }else if(checkedLength==0){
+                    layer.tips( "请选择至少一个邮箱", '.add-email .send-email-btn', {
+                        tips: [1, '#CA1515'],
+                        offset:["0","100px"],
+                        time: 2000
+                    });
+                }else{
+                    layer.tips( "您最多可选择5个邮箱", '.add-email .send-email-btn', {
+                        tips: [1, '#CA1515'],
+                        offset:["0","100px"],
+                        time: 2000
+                    });
+                }
+            }
+            //发送邮件
+            function _sendEmail(docId,shareEmailList,otherEmailList){
+                $(".close").trigger("click");
+                var param = {
+                    "data" : {"docId" : docId,"shareEmails":shareEmailList,"otherEmails":otherEmailList},
+                    "type":'post',
+                    "success":function(d){
+                        if(d.status == 200) {
+                            layer.alert("邮件发送成功！",{icon:1});
+                        }else{
+                            layer.alert("发送失败！"+d.subMsg, {icon: 2});
+                        }
+                    },
+                    error:function(){
+                        layer.alert("邮件发送失败，请重试！",{icon:2});
+                    }
+                };
+                param.beforeSend = function(){
+                    layer.msg('发送中，请稍后', {icon: 16,time:-1,shade:[0.4,'#CCC']});
+                };
+                ajax.load("emailShare",param);
+            }
+            //表单验证
+            function _formSubmit(){
+                var emailStr = $('#emailForm').find('input[type=email]').val();
+                if(emailStr==''){
+                    layer.tips('邮箱不能为空，请添加！', '#emailForm input[type=email]', {
+                        tips: [1, '#CA1515'],
+                        time: 2000
+                    });
+                    return false;
+                }
+                if(!util.checkRagular('email',emailStr)){
+                    layer.tips('输入的邮箱格式不正确，请验证！', '#emailForm input[type=email]', {
+                        tips: [1, '#CA1515'],
+                        time: 2000
+                    });
+                    return false;
+                }
+                if(!emailObj[emailStr]) {
+                    emailObj[emailStr] = emailStr;
+                    $('#add-email-box .add-email-ul').append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + emailStr + '</li>')
+                    $('#emailForm').find('input[type=email]').val('');
+                }else{
+                    layer.tips(emailStr + "已存在，请勿重复添加", '#emailForm input[type=email]', {
+                        tips: [1, '#CA1515'],
+                        time: 2000
+                    });
+                }
+                return false;
+            }
+            function _bind(){
+                util.bindEvents([{
+                    el: '.add-email .send-email-btn',
+                    event: 'click',
+                    handler: function(){
+                        _addEmail();
+                    }
+                },{
+                    el: '#emailForm',
+                    event: 'submit',
+                    handler: function(){
+                        return _formSubmit();
+                    }
+                }])
+            }
+        })
+    }
+
+    /**
      * 退出登录
      * @private
      */
@@ -215,7 +346,8 @@ define(['require','common/util','business/common/model/commonModel','handlebars'
     var obj = {
         renderHeader: renderHeader,
         renderFooter: renderFooter,
-        renderMenu: renderMenu
+        renderMenu: renderMenu,
+        renderEmail: renderEmail
     };
     // retrurn
     obj.init = init;
