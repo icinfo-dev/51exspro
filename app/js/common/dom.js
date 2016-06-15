@@ -1,7 +1,7 @@
 /**
  * dom操作
  */
-define(['jquery'],function($){
+define(['jquery'], function ($) {
 
     // html代码段集合
     var htmlMap = {
@@ -13,7 +13,6 @@ define(['jquery'],function($){
         '6': '<div class="js-placeholder emptyData"><p>暂无数据</p></div>',
         '7': '<div class="js-placeholder emptyData"><p>加载失败</p></div>'
     };
-
 
 
     /**

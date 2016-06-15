@@ -1,4 +1,4 @@
-<div id="add-email-box" class="add-email-box">
+<div id="add-email-box" class="add-email-box" style="padding: 20px;">
     <form class="form-inline add-email-input" id="emailForm" action="">
         <div class="form-group">
             <label>添加新邮箱：</label>
@@ -7,11 +7,15 @@
         <button type="submit" class="btn btn-info" id="submit1">添加</button>
     </form>
     <div class="add-email-list">
-        <p class="add-email-list-title">选择已有邮箱：<span class="text-danger pull-right">您最多选择5个邮箱</span></p>
+        <p class="add-email-list-title">选择已有邮箱：</p>
         <ul class="clearfix add-email-ul">
             <script id="addEmailTemplate" type="text/x-handlebars-template">
                 {{#each this.data}}
-                <li><label class="cy-checkbox"><input type="checkbox"><span class="{{#isCheck checked}}{{/isCheck}}"></span></label>{{this}}</li>
+                <li>
+                    <div class="cy-checkbox pull-left"><input type="checkbox"><span
+                            class="{{#isCheck checked}}{{/isCheck}}"></span></div>
+                    {{this}}
+                </li>
                 {{/each}}
             </script>
         </ul>

@@ -68,6 +68,31 @@ define(['common/config', 'common/http'], function (config, http) {
         });
     }
 
+    /**
+     * 获取预警邮箱
+     * @param options
+     */
+    function getWarnEmailList(options){
+        http.httpRequest({
+            interface: 'getwarnemaillist',
+            success: options.callBack
+        });
+    }
+
+    /**
+     * 邮件分享
+     * @param options
+     */
+    function monitorInfoEmailShare(options){
+        http.httpRequest({
+            interface: 'monitorinfoemailshare',
+            data: options.data,
+            type: 'post',
+            success: options.callBack,
+            beforeSend: options.beforeSend,
+            error: options.error
+        });
+    }
     // 返回
     return {
         getUserInfo: getUserInfo,
@@ -75,6 +100,8 @@ define(['common/config', 'common/http'], function (config, http) {
         addWarnFocusRecord: addWarnFocusRecord,
         getUserPlanList: getUserPlanList,
         canAddNewUserPlan: canAddNewUserPlan,
-        deleteUserPlan: deleteUserPlan
+        deleteUserPlan: deleteUserPlan,
+        getWarnEmailList: getWarnEmailList,
+        monitorInfoEmailShare: monitorInfoEmailShare
     }
 });
