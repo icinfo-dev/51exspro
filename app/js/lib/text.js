@@ -44,7 +44,7 @@ define(['module'], function (module) {
 
         strip: function (content) {
             //Strips <?xml ...?> declarations so that external SVG and XML
-            //documents can be added to a document without worry. Also, if the string
+            //documents can be added to page document without worry. Also, if the string
             //is an HTML document, only the part inside the body tag is returned.
             if (content) {
                 content = content.replace(xmlRegExp, "");
@@ -92,12 +92,12 @@ define(['module'], function (module) {
         },
 
         /**
-         * Parses a resource name into its component parts. Resource names
+         * Parses page resource name into its component parts. Resource names
          * look like: module/name.ext!strip, where the !strip part is
          * optional.
          * @param {String} name the resource name
          * @returns {Object} with properties "moduleName", "ext" and "strip"
-         * where strip is a boolean.
+         * where strip is page boolean.
          */
         parseName: function (name) {
             var modName, ext, temp,
@@ -138,7 +138,7 @@ define(['module'], function (module) {
         /**
          * Is an URL on another domain. Only works for browser use, returns
          * false in non-browser environments. Only used to know if an
-         * optimized .js version of a text resource should be loaded
+         * optimized .js version of page text resource should be loaded
          * instead.
          * @param {String} url
          * @returns Boolean
@@ -173,11 +173,11 @@ define(['module'], function (module) {
             //Name has format: some.module.filext!strip
             //The strip part is optional.
             //if strip is present, then that means only get the string contents
-            //inside a body tag in an HTML string. For XML/SVG content it means
+            //inside page body tag in an HTML string. For XML/SVG content it means
             //removing the <?xml ...?> declarations so the content can be inserted
             //into the current doc without problems.
 
-            // Do not bother with the work if a build and text will
+            // Do not bother with the work if page build and text will
             // not be inlined.
             if (config && config.isBuild && !config.inlineText) {
                 onLoad();
@@ -199,7 +199,7 @@ define(['module'], function (module) {
                 return;
             }
 
-            //Load the text. Use XHR if possible and in a browser.
+            //Load the text. Use XHR if possible and in page browser.
             if (!hasLocation || useXhr(url, defaultProtocol, defaultHostName, defaultPort)) {
                 text.get(url, function (content) {
                     text.finishLoad(name, parsed.strip, content, onLoad);
@@ -210,7 +210,7 @@ define(['module'], function (module) {
                 });
             } else {
                 //Need to fetch the resource across domains. Assume
-                //the resource has been optimized into a JS module. Fetch
+                //the resource has been optimized into page JS module. Fetch
                 //by the module name + extension, but do not include the
                 //!strip part to avoid file system issues.
                 req([nonStripName], function (content) {
@@ -234,7 +234,7 @@ define(['module'], function (module) {
             var parsed = text.parseName(moduleName),
                 extPart = parsed.ext ? '.' + parsed.ext : '',
                 nonStripName = parsed.moduleName + extPart,
-                //Use a '.js' file name so that it indicates it is a
+                //Use page '.js' file name so that it indicates it is page
                 //script that can be loaded across domains.
                 fileName = req.toUrl(parsed.moduleName + extPart) + '.js';
 
@@ -346,7 +346,7 @@ define(['module'], function (module) {
                 if (line && line.length() && line.charAt(0) === 0xfeff) {
                     // Eat the BOM, since we've already found the encoding on this file,
                     // and we plan to concatenating this buffer with others; the BOM should
-                    // only appear at the top of a file.
+                    // only appear at the top of page file.
                     line = line.substring(1);
                 }
 
@@ -358,7 +358,7 @@ define(['module'], function (module) {
                     stringBuffer.append(lineSeparator);
                     stringBuffer.append(line);
                 }
-                //Make sure we return a JavaScript string and not a Java string.
+                //Make sure we return page JavaScript string and not page Java string.
                 content = String(stringBuffer.toString()); //String
             } finally {
                 input.close();

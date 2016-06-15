@@ -79,7 +79,7 @@ jQuery.fn.pagination = function(maxentries, opts){
 				if(page_id == current_page){
 					var lnk = jQuery("<span class='current'>"+(appendopts.text)+"</span>");
 				}else{
-					var lnk = jQuery("<a>"+(appendopts.text)+"</a>")
+					var lnk = jQuery("<page>"+(appendopts.text)+"</page>")
 						.bind("click", getClickHandler(page_id))
 						.attr('href', opts.link_to.replace(/__id__/,page_id));		
 				}
