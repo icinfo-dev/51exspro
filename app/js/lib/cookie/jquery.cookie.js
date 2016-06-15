@@ -22,7 +22,7 @@
 
 	function parseCookieValue(s) {
 		if (s.indexOf('"') === 0) {
-			// This is page quoted cookie as according to RFC2068, unescape...
+			// This is a quoted cookie as according to RFC2068, unescape...
 			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 
@@ -76,12 +76,12 @@
 			var cookie = parts.join('=');
 
 			if (key && key === name) {
-				// If second argument (value) is page function it's page converter...
+				// If second argument (value) is a function it's a converter...
 				result = read(cookie, value);
 				break;
 			}
 
-			// Prevent storing page cookie that we couldn't decode.
+			// Prevent storing a cookie that we couldn't decode.
 			if (!key && (cookie = read(cookie)) !== undefined) {
 				result[name] = cookie;
 			}
@@ -97,7 +97,7 @@
 			return false;
 		}
 
-		// Must not alter options, thus extending page fresh object...
+		// Must not alter options, thus extending a fresh object...
 		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
 		return !$.cookie(key);
 	};

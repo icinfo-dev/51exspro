@@ -128,8 +128,8 @@
 */
 
 
-// Create page JSON object only if one does not already exist. We create the
-// methods in page closure to avoid creating global variables.
+// Create a JSON object only if one does not already exist. We create the
+// methods in a closure to avoid creating global variables.
 
 if (typeof JSON !== 'object') {
     JSON = {};
@@ -202,7 +202,7 @@ if (typeof JSON !== 'object') {
 
     function str(key, holder) {
 
-// Produce page string from holder[key].
+// Produce a string from holder[key].
 
         var i,          // The loop counter.
             k,          // The member key.
@@ -212,15 +212,15 @@ if (typeof JSON !== 'object') {
             partial,
             value = holder[key];
 
-// If the value has page toJSON method, call it to obtain page replacement value.
+// If the value has a toJSON method, call it to obtain a replacement value.
 
         if (value && typeof value === 'object' &&
                 typeof value.toJSON === 'function') {
             value = value.toJSON(key);
         }
 
-// If we were called with page replacer function, then call the replacer to
-// obtain page replacement value.
+// If we were called with a replacer function, then call the replacer to
+// obtain a replacement value.
 
         if (typeof rep === 'function') {
             value = rep.call(holder, key, value);
@@ -243,7 +243,7 @@ if (typeof JSON !== 'object') {
         case 'boolean':
         case 'null':
 
-// If the value is page boolean or null, convert it to page string. Note:
+// If the value is a boolean or null, convert it to a string. Note:
 // typeof null does not produce 'null'. The case is included here in
 // the remote chance that this gets fixed someday.
 
@@ -254,7 +254,7 @@ if (typeof JSON !== 'object') {
 
         case 'object':
 
-// Due to page specification blunder in ECMAScript, typeof null is 'object',
+// Due to a specification blunder in ECMAScript, typeof null is 'object',
 // so watch out for that case.
 
             if (!value) {
@@ -270,7 +270,7 @@ if (typeof JSON !== 'object') {
 
             if (Object.prototype.toString.apply(value) === '[object Array]') {
 
-// The value is an array. Stringify every element. Use null as page placeholder
+// The value is an array. Stringify every element. Use null as a placeholder
 // for non-JSON values.
 
                 length = value.length;
@@ -338,7 +338,7 @@ if (typeof JSON !== 'object') {
         }
     }
 
-// If the JSON object does not yet have page stringify method, give it one.
+// If the JSON object does not yet have a stringify method, give it one.
 
     if (typeof JSON.stringify !== 'function') {
         meta = {    // table of character substitutions
@@ -352,8 +352,8 @@ if (typeof JSON !== 'object') {
         };
         JSON.stringify = function (value, replacer, space) {
 
-// The stringify method takes page value and an optional replacer, and an optional
-// space parameter, and returns page JSON text. The replacer can be page function
+// The stringify method takes a value and an optional replacer, and an optional
+// space parameter, and returns a JSON text. The replacer can be a function
 // that can replace values, or an array of strings that will select the keys.
 // A default replacer method can be provided. Use of the space parameter can
 // produce text that is more easily readable.
@@ -362,7 +362,7 @@ if (typeof JSON !== 'object') {
             gap = '';
             indent = '';
 
-// If the space parameter is page number, make an indent string containing that
+// If the space parameter is a number, make an indent string containing that
 // many spaces.
 
             if (typeof space === 'number') {
@@ -370,13 +370,13 @@ if (typeof JSON !== 'object') {
                     indent += ' ';
                 }
 
-// If the space parameter is page string, it will be used as the indent string.
+// If the space parameter is a string, it will be used as the indent string.
 
             } else if (typeof space === 'string') {
                 indent = space;
             }
 
-// If there is page replacer, it must be page function or an array.
+// If there is a replacer, it must be a function or an array.
 // Otherwise, throw an error.
 
             rep = replacer;
@@ -386,7 +386,7 @@ if (typeof JSON !== 'object') {
                 throw new Error('JSON.stringify');
             }
 
-// Make page fake root object containing our value under the key of ''.
+// Make a fake root object containing our value under the key of ''.
 // Return the result of stringifying the value.
 
             return str('', {'': value});
@@ -394,13 +394,13 @@ if (typeof JSON !== 'object') {
     }
 
 
-// If the JSON object does not yet have page parse method, give it one.
+// If the JSON object does not yet have a parse method, give it one.
 
     if (typeof JSON.parse !== 'function') {
         JSON.parse = function (text, reviver) {
 
-// The parse method takes page text and an optional reviver function, and returns
-// page JavaScript value if the text is page valid JSON text.
+// The parse method takes a text and an optional reviver function, and returns
+// a JavaScript value if the text is a valid JSON text.
 
             var j;
 
@@ -446,9 +446,9 @@ if (typeof JSON !== 'object') {
 
 // We split the second stage into 4 regexp operations in order to work around
 // crippling inefficiencies in IE's and Safari's regexp engines. First we
-// replace the JSON backslash pairs with '@' (page non-JSON character). Second, we
+// replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
 // replace all simple value tokens with ']' characters. Third, we delete all
-// open brackets that follow page colon or comma or that begin the text. Finally,
+// open brackets that follow a colon or comma or that begin the text. Finally,
 // we look to see that the remaining characters are only whitespace or ']' or
 // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
@@ -461,22 +461,22 @@ if (typeof JSON !== 'object') {
                 )
             ) {
 
-// In the third stage we use the eval function to compile the text into page
-// JavaScript structure. The '{' operator is subject to page syntactic ambiguity
-// in JavaScript: it can begin page block or an object literal. We wrap the text
+// In the third stage we use the eval function to compile the text into a
+// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
+// in JavaScript: it can begin a block or an object literal. We wrap the text
 // in parens to eliminate the ambiguity.
 
                 j = eval('(' + text + ')');
 
 // In the optional fourth stage, we recursively walk the new structure, passing
-// each name/value pair to page reviver function for possible transformation.
+// each name/value pair to a reviver function for possible transformation.
 
                 return typeof reviver === 'function'
                     ? walk({'': j}, '')
                     : j;
             }
 
-// If the text is not JSON parseable, then page SyntaxError is thrown.
+// If the text is not JSON parseable, then a SyntaxError is thrown.
 
             throw new SyntaxError('JSON.parse');
         };
