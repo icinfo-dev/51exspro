@@ -145,6 +145,33 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             ele.find('loading').remove();
         }
 
+        /***
+         * 检查正则类型
+         * param
+         * @type  "phone" or  "email" or""
+         * @checkSource  "13456788888"
+         * **/
+        function checkRagular(type, data) {
+            var rgx, ragular;
+            switch (type) {
+                //新用户注册 发送 手机号
+                case 'phone' :
+                    rgx = '^[1][358][0-9]{9}$';
+                    break;
+                case 'ifSpecial':
+                    rgx = '^[a-zA-Z0-9\u4e00-\u9fa5]+$';
+                    break;
+                case 'email':
+                    rgx="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                    break;
+                default :
+                    rgx = "";
+                    break;
+            }
+            ragular = new RegExp(rgx);
+            return ragular.test(data);
+        }
+
         return {
             // 事件绑定
             bindEvents: bindEvents,
@@ -161,6 +188,7 @@ define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
             // 去除空格
             trims: trims,
             showLoading: showLoading,
-            removeLoading: removeLoading
+            removeLoading: removeLoading,
+            checkRagular: checkRagular
         };
     });
