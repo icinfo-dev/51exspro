@@ -1,7 +1,7 @@
 /**
  * 工具集
  */
-define(["handlebars", "jquery", "jquery.cookie", "bootstrap"],
+define(["handlebars", "jquery", "jquery.cookie"],
     function (handlebars) {
         /**
          * 事件绑定

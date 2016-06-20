@@ -1,5 +1,8 @@
-define(['require', 'common/util', 'business/common/model/commonModel', 'handlebars', 'layer'], function (require, util, model, handlebars) {
+define(['require', 'common/util', 'business/common/model/commonModel', 'handlebars', 'layer1'], function (require, util, model, handlebars,layer) {
 
+    layer.config({
+        path: '/js/lib/layer/' //layer.js所在的目录，可以是绝对目录，也可以是相对目录
+    });
     /**
      * 公用事件绑定
      * @type {*[]}

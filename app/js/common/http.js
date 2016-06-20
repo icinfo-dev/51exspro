@@ -1,7 +1,12 @@
 /**
  * http请求工具
  */
-define(['jquery', 'layer', 'common/config', 'common/util', 'common/dom'], function ($, layer, config, util, dom) {
+define(['jquery', 'layer1', 'common/config', 'common/util', 'common/dom'], function ($, layer, config, util, dom) {
+
+    layer.config({
+        path: '/js/lib/layer/' //layer.js所在的目录，可以是绝对目录，也可以是相对目录
+    });
+
     // http请求队列
     var httpQueue = [];
 
@@ -67,7 +72,6 @@ define(['jquery', 'layer', 'common/config', 'common/util', 'common/dom'], functi
         };
         // 失败回调
         opt.error = function () {
-            debugger;
             if (opt.defaultAction) {
                 dom.showPlaceholder(opt.actionConfig.dom, opt.actionConfig.type);
             }

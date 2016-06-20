@@ -1,4 +1,7 @@
-define(['require', 'common/util', 'business/common/model/commonModel', 'handlebars', 'business/common/view/commonView', 'layer', 'common/hbsHelper'], function (require, util, model, handlebars, commonView) {
+define(['require', 'common/util', 'business/common/model/commonModel', 'handlebars', 'business/common/view/commonView', 'layer1', 'common/hbsHelper'], function (require, util, model, handlebars, commonView) {
+    layer.config({
+        path: '/js/lib/layer/' //layer.js所在的目录，可以是绝对目录，也可以是相对目录
+    });
     /**
      * 添加新邮箱form验证
      */

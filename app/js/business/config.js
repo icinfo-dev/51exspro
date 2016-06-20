@@ -1,17 +1,11 @@
-var bootstrapDepsPath = ['jquery'];
-if(navigator.userAgent.indexOf("MSIE")>0){
-    if(navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0 || navigator.userAgent.indexOf("MSIE 8.0")>0){
-        bootstrapDepsPath.push('html5shiv.min','respond.min');
-    }
-}
-var require = {
+require.config({
     baseUrl: '/js',
     paths: {
         'jquery': 'lib/jquery-1.12.3.min',
         'jquery.cookie': 'lib/cookie/jquery.cookie',
         'bootstrap': 'lib/bootstrap.min',
         'handlebars': 'lib/handlebars-1.0.0',
-        'layer': 'lib/layer/layer',
+        'layer1': 'lib/layer/layer',
         'laydate': 'lib/laydate/laydate',
         'pagination': 'lib/pagination/jquery.pagination',
         'validate': 'lib/validate/jquery.validate.min',
@@ -25,13 +19,13 @@ var require = {
             deps: ['jquery']
         },
         'bootstrap': {
-            deps: bootstrapDepsPath
+            deps: ['jquery','html5shiv.min','respond.min']
         },
-        'layer': {
+        'layer1': {
             deps: ['jquery']
         },
         'pagination': {
-            deps: ['jquery','../../app/js/lib/css!../../app/js/lib/pagination/pagination.css']
+            deps: ['jquery','text!lib/pagination/pagination.css']
         },
         'validate': {
             deps: ['jquery']
@@ -39,6 +33,5 @@ var require = {
         'laydate': {
             deps: ['jquery']
         }
-
     }
-}
+});
