@@ -1,0 +1,20 @@
+$f: 500;
+@import "util/variable";
+@import "vendor/bootstrap";
+
+body {
+  color:#0f3643;
+  background: $dropdown-divider-bg;
+  font-weight: $f;
+}
+
+@mixin link-colors($hover,$normal, $visited) {
+  color: $normal;
+  &:hover { color: $hover; }
+  &:visited { color: $visited; }
+}
+
+a {
+  @include link-colors(#0f3643,green,red);
+}
+
